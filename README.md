@@ -1,4 +1,4 @@
-# Covid-Co-op
+# Covid Co-op
 A place to advertise and share what equipment you have on hand to battle covid
 Based on the idea of https://www.oma-aus.com/
 
