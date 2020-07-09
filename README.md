@@ -35,3 +35,4 @@ Equipment dropoff locations can also be listed.
 - [ ] allow hospitals to make requests for equipment (new migration/models)
 - [ ] show analytics for total supply/demand across australia, with time based tracking
 - [ ] dummy credit card payment system(?)
+- [ ] deploy to heroku
