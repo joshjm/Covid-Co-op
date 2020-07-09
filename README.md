@@ -36,3 +36,6 @@ Equipment dropoff locations can also be listed.
 - [ ] show analytics for total supply/demand across australia, with time based tracking
 - [ ] dummy credit card payment system(?)
 - [ ] deploy to heroku
+- [ ] quality filtering of PPE. 
+- [ ] database of people who has differnent levels of sterlization
+- [ ] way-stations/relay points for dropoff not directly at hospitals
