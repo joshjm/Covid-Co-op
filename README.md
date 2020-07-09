@@ -15,6 +15,7 @@ Based on the idea of https://www.oma-aus.com/
 - maps API
 - data visualization
 - hecking cool dev-team
+- jwt for login using react
 
 ### About
 A place to advertise what supplies you have to help fight covid. You can list what quantity of facemasks, gloves, sanitizer etc you have, and whether they are free for anyone to collect, or whether you need to be reimbursed. 
