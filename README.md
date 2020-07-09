@@ -11,7 +11,7 @@ Based on the idea of https://www.oma-aus.com/
 ## Description
 ### key features 
 - user login
-- inventory management system (CRUD) 
+- inventory management system (CRUD) and orders
 - maps API
 - data visualization
 - hecking cool dev-team
