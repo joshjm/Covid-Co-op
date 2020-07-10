@@ -17,6 +17,17 @@ Based on the idea of https://www.oma-aus.com/
 - hecking cool dev-team
 - jwt for login using react
 
+###
+Stack:
+#### front end
+- typescript
+- babel-node
+- React
+- bootstrap
+
+#### backend
+- rails as an ORM and API.
+
 ### About
 A place to advertise what supplies you have to help fight covid. You can list what quantity of facemasks, gloves, sanitizer etc you have, and whether they are free for anyone to collect, or whether you need to be reimbursed. 
 
