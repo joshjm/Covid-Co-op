@@ -53,4 +53,4 @@ Equipment dropoff locations can also be listed.
 - [ ] way-stations/relay points for dropoff not directly at hospitals
 
 ## Tools
-- (react google maps)[https://github.com/tomchentw/react-google-maps]
+- [react google maps](https://github.com/tomchentw/react-google-maps)
