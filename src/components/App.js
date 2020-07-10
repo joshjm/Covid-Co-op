@@ -22,8 +22,8 @@ function App() {
     <div className="App">
       <Router>
         <NavBar/>
-        <div class='content'>
-          <div class='body'>
+        <div className='content'>
+          <div className='body'>
               <Switch>
                 <Route exact path='/about' component={About}/>
                 <Route exact path='/sign-up' component={Signup}/>{/* keep me at the bottom */}
