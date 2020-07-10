@@ -25,12 +25,12 @@ function App() {
         <div class='content'>
           <div class='body'>
               <Switch>
-                <Route path='/about' component={About}/>
-                <Route path='/sign-up' component={Signup}/>{/* keep me at the bottom */}
-                <Route path='/sign-in' component={Signin}/>{/* keep me at the bottom */}
-                <Route path='/update' component={Update}/>{/* keep me at the bottom */}
-                <Route path='/order' component={Order}/>{/* keep me at the bottom */}
-                <Route path='/' component={Home}/>{/* keep me at the bottom */}
+                <Route exact path='/about' component={About}/>
+                <Route exact path='/sign-up' component={Signup}/>{/* keep me at the bottom */}
+                <Route exact path='/sign-in' component={Signin}/>{/* keep me at the bottom */}
+                <Route exact path='/update' component={Update}/>{/* keep me at the bottom */}
+                <Route exact path='/order' component={Order}/>{/* keep me at the bottom */}
+                <Route exact path='/' component={Home}/>{/* keep me at the bottom */}
             </Switch>
           </div>
         </div>
