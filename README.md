@@ -1,68 +1,53 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Covid Co-op
+A place to advertise and share what equipment you have on hand to battle covid
+Based on the idea of https://www.oma-aus.com/
 
-## Available Scripts
+## Name ideas
+- covid supply network
+- covid co-op
+- PERFORMANT MK I
+- Supply Dropper
 
-In the project directory, you can run:
+## Description
+### key features 
+- user login
+- inventory management system (CRUD) and orders
+- maps API
+- data visualization
+- hecking cool dev-team
+- jwt for login using react
 
-### `npm start`
+###
+Stack:
+#### front end
+- typescript
+- babel-node
+- React
+- bootstrap
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### backend
+- rails as an ORM and API.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### About
+A place to advertise what supplies you have to help fight covid. You can list what quantity of facemasks, gloves, sanitizer etc you have, and whether they are free for anyone to collect, or whether you need to be reimbursed. 
 
-### `npm test`
+You can see locally what supplies are nearby, to help prevent unecessary travel distance. 
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The app will feature tracking graphs to show supply trends around australia, and will show hospitals current demand. 
 
-### `npm run build`
+Hospitals and healthcare providers can make fulfillment requents to page as a whole, that people can fill in part or in total. 
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Equipment dropoff locations can also be listed.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### Roadmap:
+- [ ] Create a backend that can track current supply, locations, hospitals, orders/demand,
+- [ ] create a 'twitter clone' or ebay clone that can display posts people make about their current supply, which displays live from the database
+- [ ] create user login, and the ability to create new items of supply - not just displaying seed data. 
+- [ ] Display locations of supply on a map, either a custom map or using google maps/open maps API (preferred)
+- [ ] allow hospitals to make requests for equipment (new migration/models)
+- [ ] show analytics for total supply/demand across australia, with time based tracking
+- [ ] dummy credit card payment system(?)
+- [ ] deploy to heroku
+- [ ] quality filtering of PPE. 
+- [ ] database of people who has differnent levels of sterlization
+- [ ] way-stations/relay points for dropoff not directly at hospitals
