@@ -2,7 +2,6 @@ import React, {useState, Component}  from 'react';
 import './Signup.css';
 import { render } from '@testing-library/react';
 class Signup extends Component{
-
     render(){
         return(
             <div class='row justify-content-md-center'>
@@ -32,7 +31,7 @@ class Signup extends Component{
                     </div>
                 </div>
             </div>
-        )   
+        )
     }
 }
 
