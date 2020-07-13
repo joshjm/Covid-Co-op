@@ -54,3 +54,49 @@ Equipment dropoff locations can also be listed.
 
 ## Tools
 - [react google maps](https://github.com/tomchentw/react-google-maps)
+
+## Timeline
+### Weekend
+- [ ] Get models set up
+- [ ] Get basic front end up set
+### 13/7/2020
+- [ ] be able to communicate to backend with axios, to perform CRUD
+- [ ] User Auth - session tokens
+- [ ] Rails: Bcrypt, CORS, HTTP cookies handler, session controller, update user model & controller, seed data
+- [ ] React: user auth props, login/ logout (status), registration/ sign up, login, error handling/ redirect
+- [ ] Deploy backend to heroku
+- [ ] Bug fix backend
+- [ ] Set up postman for testing user login
+### 14/7/2020
+- [ ] Api to convert address to GPS - google geocoding API
+Map:
+- [ ] Display locations of products on the map
+- [ ] Clickable icons to get more info, and link to description page/link to product
+- [ ] Show location of hospitals/healthcare providers on the map 
+ORDER
+- [ ] Request/Order edit form
+- [ ] Orders show page
+- [ ] Shopping cart
+- [ ] New Request/Order submit form
+
+
+TRANSACTION
+- [ ] Create Transaction Page (list of transactions), associated with Order Page
+PRODUCT
+- [ ] Product list (availability)
+- [ ] Product details (single product)
+- [ ] Create Product(/Add Inventory) PageDummy Payment Page
+USER
+- [ ] Purchase history
+
+
+### 15/7/2020
+- [ ] analytics/ graph of total supply/demand of product types
+- [ ] Covid information/ real-time info on where supplies are most needed
+### 16/7/2020
+- [ ] Mobile app deployment (android)
+- [ ] Convert dummy payment page to working payment page
+### 17/7/2020  Final Day
+- [ ] Testing
+- [ ] Ui improvements
+
