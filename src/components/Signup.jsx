@@ -10,9 +10,21 @@ class Signup extends Component{
       email: '',
       password: '',
       password_confirmation: '',
-      errors: ''
+      errors: '',
+      SERVER_URL: 'http://covid-co-op.herokuapp.com/'
      };
+     this.postSignUp = this.postSignUp.bind(this);
   }
+
+  postSignUp = () => {
+    axios.get(this.state.SERVER_URL+'users/', {
+        name: this.state.name,
+        email: this.state.email,
+        password: this.state.password
+    }).then((response) => {
+        console.log(response);
+    })
+  };
 
   handleChange = (event) => {
       const {name, value} = event.target
@@ -23,6 +35,7 @@ class Signup extends Component{
 
   handleSubmit = (event) => {
       event.preventDefault()
+      this.postSignUp();
     };
 
     render(){
@@ -41,15 +54,15 @@ class Signup extends Component{
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input class="form-control" type="email" id="email" placeholder="Email" value={email} onChange={this.handleChange}/>
+                                    <input class="form-control" type="email" id="email" placeholder="Email" onChange={this.handleChange}/>
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
-                                    <input class="form-control" type="password" id="password" placeholder="Password" value={password} onChange={this.handleChange}/>
+                                    <input class="form-control" type="password" id="password" placeholder="Password" onChange={this.handleChange}/>
                                 </div>
                                 <div class="form-group">
                                     <label for="password-confirmation">Confirm Password</label>
-                                    <input class="form-control" type="password-confirmation" id="password-confirmation" placeholder="Password" value={password_confirmation} onChange={this.handleChange}/>
+                                    <input class="form-control" type="password-confirmation" id="password-confirmation" placeholder="Password" onChange={this.handleChange}/>
                                 </div>
                                 <div class="form-group">
                                     <label for="address">Address</label>
