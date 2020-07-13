@@ -68,11 +68,17 @@ class App extends Component {
             <div className='body'>
                 <Switch>
                   <Route exact path='/about' component={About}/>
-                  <Route exact path='/sign-up' component={Signup}/>{/* keep me at the bottom */}
-                  <Route exact path='/sign-in' component={Signin}/>{/* keep me at the bottom */}
+                  <Route exact path='/sign-up' render={props => (
+                    <Signup {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>)}
+                  />{/* keep me at the bottom */}
+                  <Route exact path='/sign-in' render={props => (
+                    <Signin {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>)}
+                  />{/* keep me at the bottom */}
                   <Route exact path='/update' component={Update}/>{/* keep me at the bottom */}
                   <Route exact path='/order' component={Order}/>{/* keep me at the bottom */}
-                  <Route exact path='/' component={Home}/>{/* keep me at the bottom */}
+                  <Route exact path='/' render={props => (
+                    <Home {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn}/>)}
+                  />{/* keep me at the bottom */}
               </Switch>
             </div>
           </div>
