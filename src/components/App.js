@@ -1,6 +1,4 @@
 import React from 'react';
-import Body from './Body';
-import Footer from './Footer';
 import NavBar from './NavBar';
 import About from './About';
 import Home from './Home';
@@ -9,6 +7,7 @@ import Signin from './Signin';
 import Update from './Update';
 import Order from './Order';
 
+
 import './App.css';
 
 import {
@@ -16,6 +15,7 @@ import {
   Switch,
   Route  
 } from "react-router-dom";
+
 
 function App() {
   return (

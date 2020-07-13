@@ -1,6 +1,7 @@
 import React, {useState, Component}  from 'react';
 import './Signup.css';
 import { render } from '@testing-library/react';
+import LocationDisplay from './LocationDisplay';
 class Signup extends Component{
 
     render(){
@@ -30,6 +31,7 @@ class Signup extends Component{
                                 <button type="button" id="submit-btn" class="btn btn-primary">Submit</button>
                         </div>
                     </div>
+                <LocationDisplay/>
                 </div>
             </div>
         )   
