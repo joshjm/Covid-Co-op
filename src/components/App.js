@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
+import Body from './Body';
+import Footer from './Footer';
 import NavBar from './NavBar';
 import About from './About';
 import Home from './Home';
@@ -13,31 +15,79 @@ import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
-  Route  
+  Route
 } from "react-router-dom";
 
+import axios from 'axios';
 
-function App() {
-  return (
-    <div className="App">
-      <Router>
-        <NavBar/>
-        <div className='content'>
-          <div className='body'>
-              <Switch>
-                <Route exact path='/about' component={About}/>
-                <Route exact path='/sign-up' component={Signup}/>{/* keep me at the bottom */}
-                <Route exact path='/sign-in' component={Signin}/>{/* keep me at the bottom */}
-                <Route exact path='/update' component={Update}/>{/* keep me at the bottom */}
-                <Route exact path='/order' component={Order}/>{/* keep me at the bottom */}
-                <Route exact path='/' component={Home}/>{/* keep me at the bottom */}
-            </Switch>
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggedIn: false,
+      user: {}
+     };
+  }
+
+  componentDidMount() {
+    this.loginStatus()
+  }
+
+    loginStatus = () => {
+      axios.get('http://localhost:3000/logged_in',
+     {withCredentials: true})
+      .then(response => {
+        if (response.data.logged_in) {
+          this.handleLogin(response)
+        } else {
+          this.handleLogout()
+        }
+      })
+      .catch(error => console.log('api errors:', error))
+    }
+
+  handleLogin = (data) => {
+    this.setState({
+      isLoggedIn: true,
+      user: data.user
+    })
+  }
+
+  handleLogout = () => {
+      this.setState({
+      isLoggedIn: false,
+      user: {}
+      })
+    }
+
+  render() {
+    return (
+      <div className="App">
+        <Router>
+          <NavBar/>
+          <div className='content'>
+            <div className='body'>
+                <Switch>
+                  <Route exact path='/about' component={About}/>
+                  <Route exact path='/sign-up' render={props => (
+                    <Signup {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>)}
+                  />{/* keep me at the bottom */}
+                  <Route exact path='/sign-in' render={props => (
+                    <Signin {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>)}
+                  />{/* keep me at the bottom */}
+                  <Route exact path='/update' component={Update}/>{/* keep me at the bottom */}
+                  <Route exact path='/order' component={Order}/>{/* keep me at the bottom */}
+                  <Route exact path='/' render={props => (
+                    <Home {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn}/>)}
+                  />{/* keep me at the bottom */}
+              </Switch>
+            </div>
           </div>
-        </div>
-        {/* <Footer/> */}
-      </Router>
-    </div>
-  );
+          {/* <Footer/> */}
+        </Router>
+      </div>
+    );
+  }
 }
 
 export default App;
