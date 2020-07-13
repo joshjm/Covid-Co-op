@@ -18,7 +18,6 @@ import {
 } from "react-router-dom";
 
 import axios from 'axios';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
 class App extends Component {
   constructor(props) {
@@ -63,15 +62,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="UserRouter">
-          <BrowserRouter>
-            <Switch>
-              <Route exact path='/' component={}/>
-              <Route exact path='/login' component={}/>
-              <Route exact path='/signup' component={}/>
-            </Switch>
-          </BrowserRouter>
-        </div>
         <Router>
           <NavBar/>
           <div className='content'>
