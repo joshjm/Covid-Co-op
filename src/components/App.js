@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Body from './Body';
-import Footer from './Footer';
+
 import NavBar from './NavBar';
 import About from './About';
 import Home from './Home';
@@ -8,6 +7,7 @@ import Signup from './Signup';
 import Signin from './Signin';
 import Update from './Update';
 import Order from './Order';
+import Products from './Products';
 
 
 import './App.css';
@@ -77,6 +77,8 @@ class App extends Component {
                   />{/* keep me at the bottom */}
                   <Route exact path='/update' component={Update}/>{/* keep me at the bottom */}
                   <Route exact path='/order' component={Order}/>{/* keep me at the bottom */}
+                  <Route exact path='/product' component={Products}/>{/* keep me at the bottom */}
+
                   <Route exact path='/' render={props => (
                     <Home {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn}/>)}
                   />{/* keep me at the bottom */}
