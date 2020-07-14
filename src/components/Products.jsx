@@ -1,38 +1,30 @@
 import React, { Component } from 'react'
 import axios from "axios";
+import _ from "lodash";
 
 export class Products extends Component {
 
     constructor() {
         super();
-        this.state = {
-            SERVER_URL: 'http://covid-co-op.herokuapp.com/products',
-            products: []
-        }
-        this.fetchProducts = this.fetchProducts.bind(this);
         this.showProducts = this.showProducts.bind(this);
-
-        this.fetchProducts();
+        this.matchUser = this.matchUser.bind(this);
     }
 
 
     // AXIOS CALL TO GET ALL PRODUCTS FROM THE SERVER
-    fetchProducts() {
-        axios.get(this.state.SERVER_URL)
-            .then(response => {
-                if (response.data) {
-                    this.setState({products: response.data});
-                } else {
-                    this.setState({
-                        errors: response.data.errors
-                    })
-                }
-            })
+
+
+    matchUser(user_id) {
+        if (this.props.users.length > 0) {
+            return this.props.users[_.findIndex(this.props.users, { id: user_id })].name;
+        } else {
+            return '';
+        }
     }
 
     showProducts() {
         return(
-            this.state.products.map((product) => {
+            this.props.products.map((product) => {
                 return(
                 <div key={product.id}>
                     <img src={product.image_url} alt={product.name}/>
@@ -40,7 +32,7 @@ export class Products extends Component {
                     <p>Category: {product.category}</p>
                     <p>Quanity available: {product.quantity}</p>
                     <p>{product.description}</p>
-                    <p>Provided by: {product.user}</p>
+                    <p>Provided by: {this.matchUser(product.user_id)}</p>
                     <p>Uploaded at: {product.created_at}</p>
                 </div>
                 )

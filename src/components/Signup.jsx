@@ -2,7 +2,6 @@ import React, {useState, Component}  from 'react';
 import './Signup.css';
 import axios from 'axios';
 import { render } from '@testing-library/react';
-import LocationDisplay from './LocationDisplay';
 class Signup extends Component{
   constructor(props) {
     super(props);
@@ -119,7 +118,6 @@ class Signup extends Component{
                                 </div>
                         </div>
                     </div>
-                <LocationDisplay/>
                 </div>
             </div>
         )

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Body from './Body';
-import Footer from './Footer';
+
 import NavBar from './NavBar';
 import About from './About';
 import Home from './Home';
@@ -8,6 +7,7 @@ import Signup from './Signup';
 import Signin from './Signin';
 import Update from './Update';
 import Order from './Order';
+import Products from './Products';
 
 
 import './App.css';
@@ -24,9 +24,44 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      PRODUCT_URL: 'http://covid-co-op.herokuapp.com/products',
+      USER_URL: 'http://covid-co-op.herokuapp.com/users',
       isLoggedIn: false,
-      user: {}
+      user: {},
+      users: [],
+      products: []
      };
+
+    this.fetchProducts = this.fetchProducts.bind(this);
+    this.fetchUsers = this.fetchUsers.bind(this);
+    this.fetchProducts();
+    this.fetchUsers();
+  }
+
+  fetchProducts() {
+    axios.get(this.state.PRODUCT_URL)
+      .then(response => {
+        if (response.data) {
+          this.setState({ products: response.data });
+        } else {
+          this.setState({
+            errors: response.data.errors
+          })
+        }
+      })
+  }
+
+  fetchUsers() {
+    axios.get(this.state.USER_URL)
+      .then(response => {
+        if (response.data) {
+          this.setState({ users: response.data.users });
+        } else {
+          this.setState({
+            errors: response.data.errors
+          })
+        }
+      })
   }
 
   componentDidMount() {
@@ -77,6 +112,8 @@ class App extends Component {
                   />{/* keep me at the bottom */}
                   <Route exact path='/update' component={Update}/>{/* keep me at the bottom */}
                   <Route exact path='/order' component={Order}/>{/* keep me at the bottom */}
+                  <Route exact path='/product' render={props => (<Products users={this.state.users} products={this.state.products}/>)}/>{/* keep me at the bottom */}
+
                   <Route exact path='/' render={props => (
                     <Home {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn}/>)}
                   />{/* keep me at the bottom */}
