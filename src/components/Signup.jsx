@@ -71,6 +71,7 @@ class Signup extends Component{
                     <div class="card">
                         <div class="card-body">
                             <h2 class = "center">Sign Up</h2>
+                              <form onSubmit={this.handleSubmit}>
                                 <div class="form-group">
                                     <label for="email">Email</label>
                                     <input class="form-control" type="email" id="email" placeholder="Email" onChange={this.handleChange}/>
@@ -87,7 +88,8 @@ class Signup extends Component{
                                     <label for="address">Address</label>
                                     <input class="form-control" type="text" id="address" placeholder="address"/>
                                 </div>
-                                <button type="button" id="submit-btn" class="btn btn-primary" onSubmit={this.handleSubmit}>Submit</button>
+                                <button type="button" id="submit-btn" class="btn btn-primary">Submit</button>
+                              </form>
 
                                 <div>
                                   {

@@ -7,7 +7,6 @@ class Signin extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
       email: '',
       password: '',
       errors: ''
@@ -26,15 +25,14 @@ class Signin extends Component{
 
   handleSubmit = (event) => {
       event.preventDefault()
-      const {username, email, password} = this.state
+      const {email, password} = this.state
 
       let user = {
-        username: username,
         email: email,
         password: password
       }
 
-      axios.post('http://localhost:3001/login', {user}, {withCredentials: true})
+      axios.post('http://localhost:3000/login', {user}, {withCredentials: true})
         .then(response => {
           if (response.data.logged_in) {
             this.props.handleLogin(response.data)
@@ -73,6 +71,7 @@ class Signin extends Component{
                     <div class="card">
                         <div class="card-body">
                             <h2 class = "center">Sign In</h2>
+                              <form onSubmit={this.handleSubmit}>
                                 <div class="form-group">
                                     <label for="email">Email</label>
                                     <input class="form-control" type="email" id="email" placeholder="Email" value={email} onChange={this.handleChange} />
@@ -82,6 +81,7 @@ class Signin extends Component{
                                     <input class="form-control" type="password" id="password" placeholder="Password" value={password} onChange={this.handleChange} />
                                 </div>
                                 <button type="button" id="submit-btn" class="btn btn-primary">Sign In</button>
+                              </form>
                         </div>
                     </div>
                 </div>
