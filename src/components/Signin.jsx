@@ -65,7 +65,7 @@ class Signin extends Component{
       }
 
     render(){
-      const {username, email, password} = this.state
+      const {email, password} = this.state
 
         return(
             <div class='row justify-content-md-center'>
