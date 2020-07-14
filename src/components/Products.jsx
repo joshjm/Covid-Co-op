@@ -34,7 +34,7 @@ export class Products extends Component {
                         <p>Quanity available: {product.quantity}</p>
                         <p>{product.description.slice(0, 30)}...</p>
                         <p>Provided by: {this.matchUser(product.user_id)}</p>
-                        <p>Uploaded at: {product.created_at}</p>
+                        <p>Posted: {Math.floor(Math.abs(new Date() - new Date(product.created_at))/1000/60/60/24)} days ago</p>
                     </div>
                     )
                 })

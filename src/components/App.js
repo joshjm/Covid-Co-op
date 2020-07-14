@@ -5,9 +5,7 @@ import About from './About';
 import Home from './Home';
 import Signup from './Signup';
 import Signin from './Signin';
-import Update from './Update';
 import Order from './Order';
-import Products from './Products';
 
 
 import './App.css';
@@ -20,12 +18,15 @@ import {
 
 import axios from 'axios';
 
+let FRONT_END_URL = "http://localhost:3000";
+let BACK_END_URL = "http://covid-co-op.herokuapp.com";
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      PRODUCT_URL: 'http://covid-co-op.herokuapp.com/products',
-      USER_URL: 'http://covid-co-op.herokuapp.com/users',
+      PRODUCT_URL: `${BACK_END_URL}/products`,
+      USER_URL: `${BACK_END_URL}/users`,
       isLoggedIn: false,
       user: {},
       users: [],
@@ -69,7 +70,7 @@ class App extends Component {
   }
 
     loginStatus = () => {
-      axios.get('http://localhost:3000/logged_in',
+      axios.get(`${FRONT_END_URL}/logged_in`,
      {withCredentials: true})
       .then(response => {
         if (response.data.logged_in) {
@@ -110,9 +111,7 @@ class App extends Component {
                   <Route exact path='/sign-in' render={props => (
                     <Signin {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>)}
                   />{/* keep me at the bottom */}
-                <Route exact path='/update' render={props => (<Update users={this.state.users} products={this.state.products} />)} />    {/* keep me at the bottom */}
                 <Route exact path='/order' render={props => (<Order users={this.state.users} products={this.state.products} />)} />      {/* keep me at the bottom */}
-                <Route exact path='/product' render={props => (<Products users={this.state.users} products={this.state.products}/>)} />  {/* keep me at the bottom */}
 
                   <Route exact path='/' render={props => (
                     <Home {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn}/>)}
