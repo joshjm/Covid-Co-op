@@ -6,10 +6,9 @@ class Signup extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      email: '',
-      password: '',
-      password_confirmation: '',
+      email: 'test@test.com',
+      password: 'chicken',
+      password_confirmation: 'chicken',
       errors: '',
       SERVER_URL: 'http://covid-co-op.herokuapp.com/'
      };
@@ -25,14 +24,13 @@ class Signup extends Component{
 
   handleSubmit = (event) => {
       event.preventDefault()
-      const {username, email, password, password_confirmation} = this.state
+      const {email, password, password_confirmation} = this.state
   let user = {
-    username: username,
     email: email,
     password: password,
     password_confirmation: password_confirmation
   }
-  axios.post('http://localhost:3000/users', {user}, {withCredentials: true})
+  axios.post('http://localhost:3000/users', user, {withCredentials: true})
   .then(response => {
     if (response.data.status === 'created') {
       this.props.handleLogin(response.data)
@@ -62,7 +60,7 @@ class Signup extends Component{
   }
 
     render(){
-      const {username, email, password, password_confirmation} = this.state
+      const {email, password, password_confirmation} = this.state
 
         return(
             <div class='row justify-content-md-center'>
@@ -73,21 +71,44 @@ class Signup extends Component{
                               <form onSubmit={this.handleSubmit}>
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input class="form-control" type="email" id="email" placeholder="Email" onChange={this.handleChange}/>
+                                    <input
+                                      class="form-control"
+                                      name="email"
+                                      type="email"
+                                      id="email"
+                                      placeholder="Email"
+                                      onChange={this.handleChange}
+                                      value={this.state.email}
+                                    />
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
-                                    <input class="form-control" type="password" id="password" placeholder="Password" onChange={this.handleChange}/>
+                                    <input
+                                      class="form-control"
+                                      type="password"
+                                      name="password_confirmation"
+                                      id="password"
+                                      placeholder="Password"
+                                      onChange={this.handleChange}
+                                      value={this.state.password}/>
                                 </div>
                                 <div class="form-group">
                                     <label for="password-confirmation">Confirm Password</label>
-                                    <input class="form-control" type="password-confirmation" id="password-confirmation" placeholder="Password" onChange={this.handleChange}/>
+                                    <input
+                                      class="form-control"
+                                      type="password"
+                                      name="password"
+                                      id="password-confirmation"
+                                      placeholder="Password"
+                                      onChange={this.handleChange}
+                                      value={this.state.password_confirmation}
+                                    />
                                 </div>
                                 <div class="form-group">
                                     <label for="address">Address</label>
                                     <input class="form-control" type="text" id="address" placeholder="address"/>
                                 </div>
-                                <button type="button" id="submit-btn" class="btn btn-primary">Submit</button>
+                                <button type="submit" id="submit-btn" class="btn btn-primary">Submit</button>
                               </form>
 
                                 <div>
