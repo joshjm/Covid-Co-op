@@ -5,9 +5,7 @@ import About from './About';
 import Home from './Home';
 import Signup from './Signup';
 import Signin from './Signin';
-import Update from './Update';
 import Order from './Order';
-import Products from './Products';
 
 
 import './App.css';
@@ -75,7 +73,6 @@ class App extends Component {
                   <Route exact path='/sign-in' render={props => (
                     <Signin {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>)}
                   />{/* keep me at the bottom */}
-                  <Route exact path='/update' component={Update}/>{/* keep me at the bottom */}
                   <Route exact path='/order' component={Order}/>{/* keep me at the bottom */}
 
                   <Route exact path='/' render={props => (
