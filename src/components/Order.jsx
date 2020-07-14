@@ -9,7 +9,7 @@ class Order extends Component{
     }
 
     propsIn() {
-        if(this.props.users > 0 && this.props.products > 0) {
+        if(this.props.users.length > 0 && this.props.products.length > 0) {
             return <Products users={this.props.users} products={this.props.products} />
         } else {
             return '';
