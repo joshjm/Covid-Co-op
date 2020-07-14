@@ -27,12 +27,12 @@ export class Products extends Component {
             return(
                 this.props.products.map((product) => {
                     return(
-                    <div key={product.id}>
-                        <img src={product.image_url} alt={product.name}/>
+                    <div key={product.id} className='col-4'>
+                        <img src={product.image_url} alt={product.name} width='200px'/>
                         <h3>{product.name}</h3>
                         <p>Category: {product.category}</p>
                         <p>Quanity available: {product.quantity}</p>
-                        <p>{product.description}</p>
+                        <p>{product.description.slice(0, 30)}...</p>
                         <p>Provided by: {this.matchUser(product.user_id)}</p>
                         <p>Uploaded at: {product.created_at}</p>
                     </div>
@@ -46,7 +46,7 @@ export class Products extends Component {
 
     render() {
         return (
-            <div>
+            <div className='row'>
                 {this.showProducts()}
             </div>
         )
