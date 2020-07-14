@@ -6,52 +6,17 @@ export class Products extends Component {
 
     constructor() {
         super();
-        this.state = {
-            PRODUCT_URL: 'http://covid-co-op.herokuapp.com/products',
-            USER_URL: 'http://covid-co-op.herokuapp.com/users',
-            products: [],
-            users: []
-        }
-        this.fetchProducts = this.fetchProducts.bind(this);
-        this.fetchUsers = this.fetchUsers.bind(this);
         this.showProducts = this.showProducts.bind(this);
         this.matchUser = this.matchUser.bind(this);
-
-        this.fetchProducts();
-        this.fetchUsers();
     }
 
 
     // AXIOS CALL TO GET ALL PRODUCTS FROM THE SERVER
-    fetchProducts() {
-        axios.get(this.state.PRODUCT_URL)
-            .then(response => {
-                if (response.data) {
-                    this.setState({products: response.data});
-                } else {
-                    this.setState({
-                        errors: response.data.errors
-                    })
-                }
-            })
-    }
 
-    fetchUsers() {
-        axios.get(this.state.USER_URL)
-            .then(response => {
-                if (response.data) {
-                    this.setState({ users: response.data.users });
-                } else {
-                    this.setState({
-                        errors: response.data.errors
-                    })
-                }
-            })
-    }
 
     matchUser(user_id) {
-        if (this.state.users.length > 0) {
-            return this.state.users[_.findIndex(this.state.users, { id: user_id })].name;
+        if (this.props.users.length > 0) {
+            return this.props.users[_.findIndex(this.props.users, { id: user_id })].name;
         } else {
             return '';
         }
@@ -59,7 +24,7 @@ export class Products extends Component {
 
     showProducts() {
         return(
-            this.state.products.map((product) => {
+            this.props.products.map((product) => {
                 return(
                 <div key={product.id}>
                     <img src={product.image_url} alt={product.name}/>
