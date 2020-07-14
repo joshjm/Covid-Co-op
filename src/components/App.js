@@ -77,7 +77,6 @@ class App extends Component {
                   />{/* keep me at the bottom */}
                   <Route exact path='/update' component={Update}/>{/* keep me at the bottom */}
                   <Route exact path='/order' component={Order}/>{/* keep me at the bottom */}
-                  <Route exact path='/product' component={Products}/>{/* keep me at the bottom */}
 
                   <Route exact path='/' render={props => (
                     <Home {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn}/>)}
