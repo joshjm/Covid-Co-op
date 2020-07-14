@@ -30,7 +30,7 @@ class Signup extends Component{
     password: password,
     password_confirmation: password_confirmation
   }
-  axios.post('http://covid-co-op.herokuapp.com/users', user, {withCredentials: true})
+    axios.post('http://localhost:3000/users', user, {withCredentials: true})
   .then(response => {
     if (response.data.status === 'created') {
       this.props.handleLogin(response.data)
