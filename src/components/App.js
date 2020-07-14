@@ -22,9 +22,44 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      PRODUCT_URL: 'http://covid-co-op.herokuapp.com/products',
+      USER_URL: 'http://covid-co-op.herokuapp.com/users',
       isLoggedIn: false,
-      user: {}
+      user: {},
+      users: [],
+      products: []
      };
+
+    this.fetchProducts = this.fetchProducts.bind(this);
+    this.fetchUsers = this.fetchUsers.bind(this);
+    this.fetchProducts();
+    this.fetchUsers();
+  }
+
+  fetchProducts() {
+    axios.get(this.state.PRODUCT_URL)
+      .then(response => {
+        if (response.data) {
+          this.setState({ products: response.data });
+        } else {
+          this.setState({
+            errors: response.data.errors
+          })
+        }
+      })
+  }
+
+  fetchUsers() {
+    axios.get(this.state.USER_URL)
+      .then(response => {
+        if (response.data) {
+          this.setState({ users: response.data.users });
+        } else {
+          this.setState({
+            errors: response.data.errors
+          })
+        }
+      })
   }
 
   componentDidMount() {
@@ -73,7 +108,9 @@ class App extends Component {
                   <Route exact path='/sign-in' render={props => (
                     <Signin {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>)}
                   />{/* keep me at the bottom */}
-                  <Route exact path='/order' component={Order}/>{/* keep me at the bottom */}
+                <Route exact path='/update' render={props => (<Update users={this.state.users} products={this.state.products} />)} />    {/* keep me at the bottom */}
+                <Route exact path='/order' render={props => (<Order users={this.state.users} products={this.state.products} />)} />      {/* keep me at the bottom */}
+                <Route exact path='/product' render={props => (<Products users={this.state.users} products={this.state.products}/>)} />  {/* keep me at the bottom */}
 
                   <Route exact path='/' render={props => (
                     <Home {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn}/>)}
