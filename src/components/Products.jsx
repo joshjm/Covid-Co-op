@@ -7,7 +7,7 @@ export class Products extends Component {
         super();
         this.state = {
             SERVER_URL: 'http://covid-co-op.herokuapp.com/products',
-            products: [{ id: 1, user: 1, name: 'Scottys facemask', category: 'facemask', quantity: '3350', image_url: 'http://placekitten.com/150/150', description: 'Great quality facemasks made with love'}, { id: 2, user: 2, name: 'Lisas Gowns', category: 'gown', quantity: 1500, image_url: 'http://placekitten.com/150/150', description: 'Medical gowns for hospital use, hand stiched with nice patterns'}, { id: 3, user: 3, name: 'Larrys facemasks', category: 'facemask', quantity: 2200, image_url: 'http://placekitten.com/150/150', description: 'N9 facemasks, industry quality for surgical use'}]
+            products: []
         }
         this.fetchProducts = this.fetchProducts.bind(this);
         this.showProducts = this.showProducts.bind(this);
@@ -32,8 +32,18 @@ export class Products extends Component {
 
     showProducts() {
         return(
-            this.state.products.map(() => {
-
+            this.state.products.map((product) => {
+                return(
+                <div key={product.id}>
+                    <img src={product.image_url} alt={product.name}/>
+                    <h3>{product.name}</h3>
+                    <p>Category: {product.category}</p>
+                    <p>Quanity available: {product.quantity}</p>
+                    <p>{product.description}</p>
+                    <p>Provided by: {product.user}</p>
+                    <p>Uploaded at: {product.created_at}</p>
+                </div>
+                )
             })
         )
     }
@@ -41,7 +51,7 @@ export class Products extends Component {
     render() {
         return (
             <div>
-                
+                {this.showProducts()}
             </div>
         )
     }
