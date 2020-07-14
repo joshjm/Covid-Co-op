@@ -15,6 +15,7 @@ export class Products extends Component {
         this.fetchProducts = this.fetchProducts.bind(this);
         this.fetchUsers = this.fetchUsers.bind(this);
         this.showProducts = this.showProducts.bind(this);
+        this.matchUser = this.matchUser.bind(this);
 
         this.fetchProducts();
         this.fetchUsers();
@@ -48,6 +49,14 @@ export class Products extends Component {
             })
     }
 
+    matchUser(user_id) {
+        if (this.state.users.length > 0) {
+            return this.state.users[_.findIndex(this.state.users, { id: user_id })].name;
+        } else {
+            return '';
+        }
+    }
+
     showProducts() {
         return(
             this.state.products.map((product) => {
@@ -58,7 +67,7 @@ export class Products extends Component {
                     <p>Category: {product.category}</p>
                     <p>Quanity available: {product.quantity}</p>
                     <p>{product.description}</p>
-                    <p>Provided by: {this.state.users[_.findIndex(this.state.users, {id: product.user_id})].name}</p>
+                    <p>Provided by: {this.matchUser(product.user_id)}</p>
                     <p>Uploaded at: {product.created_at}</p>
                 </div>
                 )
