@@ -18,12 +18,14 @@ import {
 
 import axios from 'axios';
 
+let FRONT_END_URL = "http://localhost:3000";
+let BACK_END_URL = "http://covid-co-op.herokuapp.com";
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      PRODUCT_URL: 'http://covid-co-op.herokuapp.com/products',
-      USER_URL: 'http://covid-co-op.herokuapp.com/users',
+      PRODUCT_URL: `${BACK_END_URL}/products`,
+      USER_URL: `${BACK_END_URL}/users`,
       isLoggedIn: false,
       user: {},
       users: [],
@@ -67,7 +69,7 @@ class App extends Component {
   }
 
     loginStatus = () => {
-      axios.get('http://localhost:3000/logged_in',
+      axios.get(`${FRONT_END_URL}/logged_in`,
      {withCredentials: true})
       .then(response => {
         if (response.data.logged_in) {
