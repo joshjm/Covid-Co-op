@@ -11,8 +11,8 @@ class Signin extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: '',
+      email: 'test@test.com',
+      password: 'chicken',
       errors: ''
      };
   }
@@ -97,6 +97,9 @@ class Signin extends Component{
                                 </div>
                                 <button type="submit" id="submit-btn" className="btn btn-primary">Sign In</button>
                               </form>
+                              <div>
+                                {this.state.errors ? this.handleErrors() : null}
+                              </div>
                         </div>
                     </div>
                 </div>
