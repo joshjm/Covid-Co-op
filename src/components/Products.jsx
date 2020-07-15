@@ -1,11 +1,17 @@
 import React, { Component } from 'react'
 import _ from "lodash";
+import SearchResults from 'react-filter-search'
 import './Products.css'
 
 export class Products extends Component {
 
     constructor() {
         super();
+
+        this.state = {
+            value: ''
+        }
+
         this.showProducts = this.showProducts.bind(this);
         this.matchUser = this.matchUser.bind(this);
     }
@@ -22,10 +28,15 @@ export class Products extends Component {
         }
     }
 
-    showProducts() {
-        if(this.props.products.length > 0) {
+    handleChange = (event) => {
+        const { value } = event.target;
+        this.setState({ value });
+    };
+
+    showProducts(productsArray) {
+        if(productsArray) {
             return(
-                this.props.products.map((product) => {
+                productsArray.map((product) => {
                     return(
                     <div key={product.id} className='col-3 item'>
                         <img src={product.image_url} alt={product.name}/>
@@ -47,7 +58,19 @@ export class Products extends Component {
     render() {
         return (
             <div className='row'>
-                {this.showProducts()}
+                <div className="row">
+                    <input type="text" value={this.state.value} onChange={this.handleChange} />
+                </div>
+                <div className="row">
+                    {this.showProducts()}
+                    <SearchResults
+                        value={this.state.value}
+                        data={this.props.products}
+                        renderResults={results => (
+                            this.showProducts(results)
+                        )}
+                    />
+                </div>
             </div>
         )
     }
