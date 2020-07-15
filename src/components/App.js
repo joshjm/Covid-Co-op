@@ -20,7 +20,7 @@ import {
 import axios from 'axios';
 
 let FRONT_END_URL = "http://localhost:3000";
-let BACK_END_URL = "http://covid-co-op.herokuapp.com";
+let BACK_END_URL = "https://covid-co-op.herokuapp.com";
 
 class App extends Component {
   constructor(props) {
