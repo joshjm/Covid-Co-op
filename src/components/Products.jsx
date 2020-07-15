@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import axios from "axios";
 import _ from "lodash";
+import './Products.css'
 
 export class Products extends Component {
 
@@ -27,13 +27,13 @@ export class Products extends Component {
             return(
                 this.props.products.map((product) => {
                     return(
-                    <div key={product.id} className='col-4'>
-                        <img src={product.image_url} alt={product.name} width='200px'/>
-                        <h3>{product.name}</h3>
+                    <div key={product.id} className='col-3 item'>
+                        <img src={product.image_url} alt={product.name}/>
+                        <h3>{product.name.slice(0, 25)} ...</h3>
                         <p>Category: {product.category}</p>
-                        <p>Quanity available: {product.quantity}</p>
+                        <p>Quantity available: {product.quantity}</p>
                         <p>{product.description.slice(0, 30)}...</p>
-                        <p>Provided by: {this.matchUser(product.user_id)}</p>
+                            <p>Provided by: <a href="">{this.matchUser(product.user_id)}</a></p>
                         <p>Posted: {Math.floor(Math.abs(new Date() - new Date(product.created_at))/1000/60/60/24)} days ago</p>
                     </div>
                     )

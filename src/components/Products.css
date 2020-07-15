@@ -1,0 +1,16 @@
+.item p {
+    margin: 0em;
+}
+
+.item {
+    margin: 2em;
+    border-radius: 1em;
+    padding: 1em 3em;
+    box-shadow: 2px 2px 5px lightblue
+}
+
+img {
+    width: 100%;
+    height: 10em;
+    object-fit: contain;
+}
