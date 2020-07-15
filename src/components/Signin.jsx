@@ -1,15 +1,20 @@
-import React, {useState, Component}  from 'react';
+import React, {Component}  from 'react';
 import './Signin.css';
 import axios from 'axios'
-import {Link} from 'react-router-dom'
-import { render } from '@testing-library/react';
+
+import { config } from '../Constants' // get prod/dev urls
+let FRONT_END_URL = config.url.FRONT_END_URL;
+let BACK_END_URL = config.url.API_URL;
+
+
 class Signin extends Component{
   constructor(props) {
     super(props);
     this.state = {
       email: '',
       password: '',
-      errors: ''
+      errors: '',
+      SERVER_URL: 'http://covid-co-op.herokuapp.com/login'
      };
   }
   componentWillMount() {
@@ -32,7 +37,7 @@ class Signin extends Component{
         password: password
       }
 
-      axios.post('http://localhost:3000/login', {user}, {withCredentials: true})
+      axios.post(this.state.SERVER_URL, {user}, {withCredentials: true})
         .then(response => {
           if (response.data.logged_in) {
             this.props.handleLogin(response.data)

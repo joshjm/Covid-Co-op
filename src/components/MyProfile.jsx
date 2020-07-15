@@ -3,6 +3,10 @@ import { Redirect } from 'react-router-dom';
 import './MyProfile.css';
 import axios from 'axios';
 import { render } from '@testing-library/react';
+import { config } from '../Constants' // get prod/dev urls
+let FRONT_END_URL = config.url.FRONT_END_URL;
+let BACK_END_URL = config.url.API_URL;
+
 class MyProfile extends Component{
   constructor(props) {
     super(props);
@@ -13,7 +17,7 @@ class MyProfile extends Component{
       location:'',
       errors: '',
       isChange: false,
-      SERVER_URL: 'http://covid-co-op.herokuapp.com/'
+      SERVER_URL: BACK_END_URL
      };
      this.redirect = this.redirect.bind(this);
   }
@@ -41,7 +45,7 @@ class MyProfile extends Component{
       password_confirmation: password_confirmation,
       location: location
     }
-    axios.patch(`http://localhost:3000/users/${this.props.user.id}.json`, user, {withCredentials: true})
+    axios.patch(`${BACK_END_URL}/users/${this.props.user.id}.json`, user, {withCredentials: true})
     .then(response => {
       console.log(response)
       this.setState ({

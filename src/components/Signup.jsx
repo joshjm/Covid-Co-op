@@ -11,7 +11,7 @@ class Signup extends Component{
       password_confirmation: 'chicken',
       address: '',
       errors: '',
-      SERVER_URL: 'http://covid-co-op.herokuapp.com/'
+      SERVER_URL: 'http://covid-co-op.herokuapp.com/users'
      };
   }
 
@@ -32,8 +32,10 @@ class Signup extends Component{
     password_confirmation: password_confirmation,
     location: address
   }
-    axios.post('http://localhost:3000/users', user, {withCredentials: true})
+    axios.post(this.state.SERVER_URL, user, {withCredentials: true})
   .then(response => {
+    console.log(response);
+    console.log("flag");
     if (response.data.status === 'created') {
       this.props.handleLogin(response.data)
       this.redirect()
@@ -65,16 +67,16 @@ class Signup extends Component{
       const {email, password, password_confirmation, address} = this.state
 
         return(
-            <div class='row justify-content-md-center'>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h2 class = "center">Sign Up</h2>
+            <div className='row justify-content-md-center'>
+                <div className="col-md-6">
+                    <div className="card">
+                        <div className="card-body">
+                            <h2 className = "center">Sign Up</h2>
                               <form onSubmit={this.handleSubmit}>
-                                <div class="form-group">
+                                <div className="form-group">
                                     <label for="email">Email</label>
                                     <input
-                                      class="form-control"
+                                      className="form-control"
                                       name="email"
                                       type="email"
                                       id="email"
@@ -83,10 +85,10 @@ class Signup extends Component{
                                       value={this.state.email}
                                     />
                                 </div>
-                                <div class="form-group">
+                                <div className="form-group">
                                     <label for="password">Password</label>
                                     <input
-                                      class="form-control"
+                                      className="form-control"
                                       type="password"
                                       name="password_confirmation"
                                       id="password"
@@ -95,10 +97,10 @@ class Signup extends Component{
                                       value={this.state.password}
                                     />
                                 </div>
-                                <div class="form-group">
+                                <div className="form-group">
                                     <label for="password-confirmation">Confirm Password</label>
                                     <input
-                                      class="form-control"
+                                      className="form-control"
                                       type="password"
                                       name="password"
                                       id="password-confirmation"
@@ -107,10 +109,10 @@ class Signup extends Component{
                                       value={this.state.password_confirmation}
                                     />
                                 </div>
-                                <div class="form-group">
+                                <div className="form-group">
                                     <label for="address">Address</label>
                                     <input
-                                      class="form-control"
+                                      className="form-control"
                                       type="text"
                                       name="address"
                                       id="address"
@@ -119,7 +121,7 @@ class Signup extends Component{
                                       value={this.state.address}
                                     />
                                 </div>
-                                <button type="submit" id="submit-btn" class="btn btn-primary">Submit</button>
+                                <button type="submit" id="submit-btn" className="btn btn-primary">Submit</button>
                               </form>
 
                                 <div>

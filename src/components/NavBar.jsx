@@ -17,14 +17,15 @@ class NavBar extends Component{
                       <li className="nav-item">
                           <Link to='/' className="nav-link">Home</Link>
                       </li>
-                      {/* TODO only render if not logged in */}
-                      <li className="nav-item">
+                      
+                        <li className="nav-item">
                           <Link to='/sign-up' className="nav-link">Sign up</Link>
-                      </li>
-                      <li className="nav-item">
-                          <Link to='/sign-in' className="nav-link">Sign in</Link>
-                      </li>
-                      {/* TODO only render if logged in */}
+                        </li>
+                      
+                      
+                        <li className="nav-item">
+                            <Link to='/sign-in' className="nav-link">Sign in</Link>
+                        </li>
                       <li className="nav-item">
                           <Link to='/order' className="nav-link">Place order</Link>
                       </li>
@@ -34,7 +35,7 @@ class NavBar extends Component{
                       </li>
                       <li className="nav-item">
                           <Link to='/profile' className="nav-link">My Profile</Link>
-                      </li> 
+                      </li>
                     </ul>
                 </div>
             </nav>
