@@ -11,7 +11,7 @@ class Signup extends Component{
       password_confirmation: 'chicken',
       address: '',
       errors: '',
-      SERVER_URL: 'http://covid-co-op.herokuapp.com/users'
+      SERVER_URL: 'https://covid-co-op.herokuapp.com/users'
      };
   }
 

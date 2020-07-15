@@ -10,7 +10,7 @@ class Signin extends Component{
       email: '',
       password: '',
       errors: '',
-      SERVER_URL: 'http://covid-co-op.herokuapp.com/login'
+      SERVER_URL: 'https://covid-co-op.herokuapp.com/login'
      };
   }
   componentWillMount() {
