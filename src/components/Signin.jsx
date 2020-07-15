@@ -77,7 +77,7 @@ class Signin extends Component{
                             <h2 className = "center">Sign In</h2>
                               <form onSubmit={this.handleSubmit}>
                                 <div className="form-group">
-                                    <label for="email">Email</label>
+                                    <label>Email</label>
                                     <input
                                       className="form-control"
                                       name="email"
@@ -89,7 +89,7 @@ class Signin extends Component{
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label for="password">Password</label>
+                                    <label >Password</label>
                                     <input
                                       className="form-control"
                                       name="password"

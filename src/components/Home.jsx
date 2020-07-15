@@ -5,6 +5,7 @@ import  MapContainer  from './MapContainer';
 import  AddressConverter  from './AddressConverter';
 import './Home.css';
 import { config } from '../Constants' // get prod/dev urls
+import { Redirect } from 'react-router-dom'
 
 let FRONT_END_URL = config.url.FRONT_END_URL;
 let BACK_END_URL = config.url.API_URL;
@@ -17,22 +18,6 @@ class Home extends Component{
       isLoggedIn: true,
       user: {}
      };
-  }
-
-  handleClick = () => {
-    axios.delete(`${BACK_END_URL}/logout`, {withCredentials: true})
-    .then(response => {
-      this.handleLogout()
-      this.history.push('/')
-    })
-    .catch(error => console.log(error))
-  }
-
-  handleLogout = () => {
-    this.setState({
-      isLoggedIn: false,
-      user: {}
-    })
   }
 
   render(){
