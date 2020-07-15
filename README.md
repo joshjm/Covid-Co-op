@@ -3,6 +3,7 @@ A place to advertise and share what equipment you have on hand to battle covid
 Based on the idea of https://www.oma-aus.com/
 
 **[Relational Model](https://docs.google.com/drawings/d/19rR_shnmXq3-8fINedSf1_5HKc0NyXGFbh7hTcxJJ8o/edit)**
+
 heroku backend http://covid-co-op.herokuapp.com
 
 GH-Pages frontend https://joshjm.github.io/Covid-Co-op/
