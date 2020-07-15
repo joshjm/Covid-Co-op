@@ -14,6 +14,7 @@ export class Products extends Component {
 
         this.showProducts = this.showProducts.bind(this);
         this.matchUser = this.matchUser.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
 
@@ -26,6 +27,11 @@ export class Products extends Component {
         } else {
             return '';
         }
+    }
+
+    handleClick(user_id) {
+      console.log('this is:', this)
+
     }
 
     handleChange = (event) => {
@@ -46,6 +52,7 @@ export class Products extends Component {
                         <p>{product.description.slice(0, 30)}...</p>
                             <p>Provided by: <a href="">{this.matchUser(product.user_id)}</a></p>
                         <p>Posted: {Math.floor(Math.abs(new Date() - new Date(product.created_at))/1000/60/60/24)} days ago</p>
+                        <button type="button" id="submit-btn" className="btn btn-success btn-sm" onClick={this.handleClick}>Add to Cart</button>
                     </div>
                     )
                 })
@@ -59,7 +66,7 @@ export class Products extends Component {
         return (
             <div className='row'>
                 <div className="row">
-                    <input type="text" value={this.state.value} onChange={this.handleChange} />
+                    <span className="search-heading">{"Search:"}</span> <input type="text" value={this.state.value} onChange={this.handleChange} />
                 </div>
                 <div className="row">
                     {this.showProducts()}
