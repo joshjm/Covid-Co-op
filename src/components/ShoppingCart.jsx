@@ -8,7 +8,6 @@ class ShoppingCart extends Component {
     this.state = {
       product_id: ''
      }
-    product_id: this.props.location.state
   }
 
   showProducts(productsArray) {
