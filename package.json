@@ -1,6 +1,6 @@
 {
+  "homepage": "https://joshjm.github.io/Covid-Co-op/",
   "name": "covid-co-op",
-  "homepage": "https://joshjm.github.io/Covid-Co-op",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
