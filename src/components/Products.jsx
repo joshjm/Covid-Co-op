@@ -11,7 +11,7 @@ export class Products extends Component {
         this.state = {
             value: '',
             products: [],
-            catagories: this.getCategories()
+            sendToCart: ''
         }
 
         this.showProducts = this.showProducts.bind(this);
@@ -32,8 +32,9 @@ export class Products extends Component {
         }
     }
 
-    handleClick(user_id) {
-      console.log('this is:', this)
+    handleClick = (product_id) => {
+        console.log(product_id);
+      this.setState({ sendToCart: product_id })
 
     }
 
@@ -55,7 +56,7 @@ export class Products extends Component {
                         <p>{product.description.slice(0, 30)}...</p>
                             <p>Provided by: <a href="">{this.matchUser(product.user_id)}</a></p>
                         <p>Posted: {Math.floor(Math.abs(new Date() - new Date(product.created_at))/1000/60/60/24)} days ago</p>
-                        <button type="button" className="btn btn-success btn-sm" onClick={this.handleClick}>Add to Cart</button>
+                        {this.props.isLoggedIn ? <button type="button" className="btn btn-success btn-sm" onClick={() => {this.handleClick(product.id)}}>Add to Cart</button> : ''}
                     </div>
                     )
                 })
