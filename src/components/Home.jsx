@@ -4,6 +4,12 @@ import {Link} from 'react-router-dom';
 import  MapContainer  from './MapContainer';
 import  AddressConverter  from './AddressConverter';
 import './Home.css';
+import { config } from '../Constants' // get prod/dev urls
+
+let FRONT_END_URL = config.url.FRONT_END_URL;
+let BACK_END_URL = config.url.API_URL;
+
+
 class Home extends Component{
   constructor(props) {
     super(props);
@@ -14,7 +20,7 @@ class Home extends Component{
   }
 
   handleClick = () => {
-    axios.delete('http://localhost:3001/logout', {withCredentials: true})
+    axios.delete(`${FRONT_END_URL}/logout`, {withCredentials: true})
     .then(response => {
       this.handleLogout()
       this.history.push('/')
