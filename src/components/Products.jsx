@@ -60,7 +60,7 @@ export class Products extends Component {
             <p>{product.description.slice(0, 30)}...</p>
             <p>Provided by: <a href="">{this.matchUser(product.user_id)}</a></p>
             <p>Posted: {Math.floor(Math.abs(new Date() - new Date(product.created_at))/1000/60/60/24)} days ago</p>
-            {this.props.isLoggedIn ? <button type="button" className="btn btn-success btn-sm" onClick={() => {this.handleClick(product.id)}}>Add to Cart</button> : ''}
+            {this.props.isLoggedIn ? <button type="button" className="btn btn-success btn-sm" onClick={() => {this.handleClick(product.id)}}>Add to Cart</button> : null}
             {this.state.sendToCart ? <Redirect to={{pathname: "/shoppingcart", state: {product_id: this.state.sendToCart}}} /> : ''}
           </div>
           )
