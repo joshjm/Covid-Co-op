@@ -15,7 +15,6 @@ class Signup extends Component{
       password_confirmation: 'chicken',
       address: '',
       errors: '',
-      SERVER_URL: `${BACK_END_URL}/users`
     };
   }
 
@@ -36,7 +35,7 @@ class Signup extends Component{
     password_confirmation: password_confirmation,
     location: address
   }
-    axios.post(this.state.SERVER_URL, user, {withCredentials: true})
+    axios.post(BACK_END_URL+'/users', user, {withCredentials: true})
   .then(response => {
     console.log(response);
     console.log("flag");

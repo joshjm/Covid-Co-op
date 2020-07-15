@@ -14,7 +14,6 @@ class Signin extends Component{
       email: '',
       password: '',
       errors: '',
-      SERVER_URL: `${BACK_END_URL}/login`
      };
   }
   componentWillMount() {
@@ -37,7 +36,7 @@ class Signin extends Component{
         password: password
       }
 
-      axios.post(this.state.SERVER_URL, {user}, {withCredentials: true})
+      axios.post(BACK_END_URL+'/login', {user}, {withCredentials: true})
         .then(response => {
           if (response.data.logged_in) {
             this.props.handleLogin(response.data)
