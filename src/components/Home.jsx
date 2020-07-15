@@ -14,7 +14,7 @@ class Home extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: true,
+      isLoggedIn: false,
       user: {}
      };
   }
@@ -23,8 +23,9 @@ class Home extends Component{
     axios.delete(`${BACK_END_URL}/logout`, {withCredentials: true})
     .then(response => {
       this.handleLogout()
-      this.history.push('/')
-    })
+    }).then(
+      this.redirect()
+    )
     .catch(error => console.log(error))
   }
 
@@ -33,6 +34,10 @@ class Home extends Component{
       isLoggedIn: false,
       user: {}
     })
+  }
+
+  redirect = () => {
+    this.props.history.push('/')
   }
 
   render(){
