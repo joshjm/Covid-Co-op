@@ -20,12 +20,19 @@ class Home extends Component{
   }
 
   handleClick = () => {
-    axios.delete(`${FRONT_END_URL}/logout`, {withCredentials: true})
+    axios.delete(`${BACK_END_URL}/logout`, {withCredentials: true})
     .then(response => {
       this.handleLogout()
       this.history.push('/')
     })
     .catch(error => console.log(error))
+  }
+
+  handleLogout = () => {
+    this.setState({
+      isLoggedIn: false,
+      user: {}
+    })
   }
 
   render(){

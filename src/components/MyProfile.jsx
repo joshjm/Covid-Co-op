@@ -98,7 +98,7 @@ class MyProfile extends Component{
                     />
                   </div>
                   <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password">Update Password</label>
                     <input
                       class="form-control"
                       type="password"
@@ -122,13 +122,13 @@ class MyProfile extends Component{
                     />
                   </div>
                   <div class="form-group">
-                    <label for="location">location</label>
+                    <label for="location">Update Location</label>
                     <input
                       class="form-control"
                       type="text"
                       name="location"
                       id="location"
-                      placeholder="location"
+                      placeholder="Location"
                       onChange={this.handleChange}
                       value={this.state.location}
                     />
