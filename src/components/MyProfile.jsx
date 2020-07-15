@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import './MyProfile.css';
 import axios from 'axios';
 import { render } from '@testing-library/react';
-
+import { config } from '../Constants' // get prod/dev urls
 let FRONT_END_URL = config.url.FRONT_END_URL;
 let BACK_END_URL = config.url.API_URL;
 
