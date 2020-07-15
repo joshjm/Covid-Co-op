@@ -2,6 +2,10 @@ import React, {useState, Component}  from 'react';
 import './Signup.css';
 import axios from 'axios';
 import { render } from '@testing-library/react';
+import { config } from '../Constants' // get prod/dev urls
+let FRONT_END_URL = config.url.FRONT_END_URL;
+let BACK_END_URL = config.url.API_URL;
+
 class Signup extends Component{
   constructor(props) {
     super(props);
@@ -11,8 +15,7 @@ class Signup extends Component{
       password_confirmation: 'chicken',
       address: '',
       errors: '',
-      SERVER_URL: 'http://covid-co-op.herokuapp.com/users'
-     };
+    };
   }
 
 
@@ -32,7 +35,7 @@ class Signup extends Component{
     password_confirmation: password_confirmation,
     location: address
   }
-    axios.post(this.state.SERVER_URL, user, {withCredentials: true})
+    axios.post(BACK_END_URL+'/users', user, {withCredentials: true})
   .then(response => {
     console.log(response);
     console.log("flag");
