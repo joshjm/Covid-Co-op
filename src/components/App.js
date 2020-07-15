@@ -5,6 +5,7 @@ import About from './About';
 import Home from './Home';
 import Signup from './Signup';
 import Signin from './Signin';
+import MyProfile from './MyProfile';
 import Order from './Order';
 
 
@@ -111,8 +112,10 @@ class App extends Component {
                   <Route exact path='/sign-in' render={props => (
                     <Signin {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>)}
                   />{/* keep me at the bottom */}
-                <Route exact path='/order' render={props => (<Order users={this.state.users} products={this.state.products} />)} />      {/* keep me at the bottom */}
-
+                  <Route exact path='/order' render={props => (<Order users={this.state.users} products={this.state.products} />)} />      {/* keep me at the bottom */}
+                  <Route exact path='/profile' render={props => (
+                    <MyProfile {...props} user={this.state.user} loggedInStatus={this.state.isLoggedIn}/>)}
+                  />
                   <Route exact path='/' render={props => (
                     <Home {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn}/>)}
                   />{/* keep me at the bottom */}

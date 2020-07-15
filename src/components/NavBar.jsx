@@ -19,17 +19,18 @@ class NavBar extends Component{
                     </li>
                     <li className="nav-item">
                         <Link to='/sign-up' className="nav-link">Sign up</Link>
-                    </li>  
+                    </li>
                     <li className="nav-item">
                         <Link to='/sign-in' className="nav-link">Sign in</Link>
-                    </li>  
-
+                    </li>
                     <li className="nav-item">
                         <Link to='/order' className="nav-link">Place order</Link>
                     </li>
-           
+                    <li className="nav-item">
+                        <Link to='/profile' className="nav-link">My Profile</Link>
+                    </li>
                     </ul>
-                </div>  
+                </div>
             </nav>
         )
     }
