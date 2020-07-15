@@ -6,6 +6,7 @@ import Home from './Home';
 import Signup from './Signup';
 import Signin from './Signin';
 import Order from './Order';
+import Cart from './Cart';
 
 
 import './App.css';
@@ -108,15 +109,16 @@ class App extends Component {
                   <Route exact path='/about' component={About}/>
                   <Route exact path='/sign-up' render={props => (
                     <Signup {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>)}
-                  />{/* keep me at the bottom */}
+                  />
                   <Route exact path='/sign-in' render={props => (
                     <Signin {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>)}
-                  />{/* keep me at the bottom */}
-                <Route exact path='/order' render={props => (<Order users={this.state.users} products={this.state.products} />)} />      {/* keep me at the bottom */}
+                  />
+                  <Route exact path='/order' render={props => (<Order users={this.state.users} products={this.state.products} />)} />      
+                  <Route exact path='/cart' component={Cart}/>
 
                   <Route exact path='/' render={props => (
                     <Home {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn}/>)}
-                  />{/* keep me at the bottom */}
+                  />
               </Switch>
             </div>
           </div>
