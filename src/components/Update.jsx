@@ -6,7 +6,7 @@ class Update extends Component{
             <div>
                 <h1>Update page</h1>
             </div>
-        )   
+        )
     }
 }
 
