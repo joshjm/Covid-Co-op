@@ -8,6 +8,7 @@ export class Products extends Component {
         super();
         this.showProducts = this.showProducts.bind(this);
         this.matchUser = this.matchUser.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
 
@@ -22,6 +23,12 @@ export class Products extends Component {
         }
     }
 
+    handleClick(user_id) {
+      console.log('this is:', this)
+      
+    }
+
+
     showProducts() {
         if(this.props.products.length > 0) {
             return(
@@ -35,6 +42,7 @@ export class Products extends Component {
                         <p>{product.description.slice(0, 30)}...</p>
                             <p>Provided by: <a href="">{this.matchUser(product.user_id)}</a></p>
                         <p>Posted: {Math.floor(Math.abs(new Date() - new Date(product.created_at))/1000/60/60/24)} days ago</p>
+                        <button type="button" id="submit-btn" className="btn btn-success btn-sm" onClick={this.handleClick}>Add to Cart</button>
                     </div>
                     )
                 })
