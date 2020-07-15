@@ -10,40 +10,40 @@ class MyProfile extends Component{
       email: '',
       password: '',
       password_confirmation: '',
-      address:'',
+      location:'',
       errors: '',
       isChange: false,
       SERVER_URL: 'http://covid-co-op.herokuapp.com/'
      };
      this.redirect = this.redirect.bind(this);
   }
+
   componentDidMount() {
     this.setState({
       email: this.props.user.email,
-      address: this.props.user.location
+      location: this.props.user.location
     })
   }
 
   handleChange = (event) => {
-      const {name, value} = event.target
-      this.setState({
-        [name]: value
-      })
-    };
+    const {name, value} = event.target
+    this.setState({
+      [name]: value
+    })
+  };
 
   handleSubmit = (event) => {
     event.preventDefault()
-    const {email, password, password_confirmation, address} = this.state
+    const {email, password, password_confirmation, location} = this.state
     let user = {
       email: email,
       password: password,
       password_confirmation: password_confirmation,
-      location: address
+      location: location
     }
     axios.patch(`http://localhost:3000/users/${this.props.user.id}.json`, user, {withCredentials: true})
     .then(response => {
       console.log(response)
-        // this.redirect()
       this.setState ({
         isChange: true
       })
@@ -53,9 +53,9 @@ class MyProfile extends Component{
     .catch(error => console.log('api errors:', error))
   };
 
-    redirect = () => {
-      this.props.history.push('/')
-    }
+  redirect = () => {
+    this.props.history.push('/')
+  }
 
   handleErrors = () => {
     return (
@@ -68,79 +68,76 @@ class MyProfile extends Component{
     )
   }
 
-    render(){
-      const {email, password, password_confirmation, address} = this.state
+  render(){
+    const {email, password, password_confirmation, location} = this.state
 
-        return(
-          this.state.isChange ? < Redirect to='/' /> :
-            <div class='row justify-content-md-center'>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h2 class = "center">Edit User Details</h2>
-                              <form onSubmit={this.handleSubmit}>
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input
-                                      class="form-control"
-                                      name="email"
-                                      type="email"
-                                      id="email"
-                                      placeholder="Email"
-                                      onChange={this.handleChange}
-                                      value={this.state.email}
-                                    />
-                                </div>
-                                <div class="form-group">
-                                    <label for="password">Password</label>
-                                    <input
-                                      class="form-control"
-                                      type="password"
-                                      name="password_confirmation"
-                                      id="password"
-                                      placeholder="Password"
-                                      onChange={this.handleChange}
-                                      value={this.state.password}
-                                    />
-                                </div>
-                                <div class="form-group">
-                                    <label for="password-confirmation">Confirm Password</label>
-                                    <input
-                                      class="form-control"
-                                      type="password"
-                                      name="password"
-                                      id="password-confirmation"
-                                      placeholder="Password"
-                                      onChange={this.handleChange}
-                                      value={this.state.password_confirmation}
-                                    />
-                                </div>
-                                <div class="form-group">
-                                    <label for="address">Address</label>
-                                    <input
-                                      class="form-control"
-                                      type="text"
-                                      name="address"
-                                      id="address"
-                                      placeholder="address"
-                                      onChange={this.handleChange}
-                                      value={this.state.address}
-                                    />
-                                </div>
-                                <button type="submit" id="submit-btn" class="btn btn-primary">Submit</button>
-                              </form>
-
-                                <div>
-                                  {
-                                    this.state.errors ? this.handleErrors() : null
-                                  }
-                                </div>
-                        </div>
-                    </div>
+    return(
+      this.state.isChange ? < Redirect to='/' /> :
+      <div class='row justify-content-md-center'>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <h2 class = "center">Update User Details</h2>
+                <form onSubmit={this.handleSubmit}>
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input
+                      class="form-control"
+                      name="email"
+                      type="email"
+                      id="email"
+                      placeholder="Email"
+                      onChange={this.handleChange}
+                      value={this.state.email}
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="password">Password</label>
+                    <input
+                      class="form-control"
+                      type="password"
+                      name="password_confirmation"
+                      id="password"
+                      placeholder="Password"
+                      onChange={this.handleChange}
+                      value={this.state.password}
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="password-confirmation">Confirm Password</label>
+                    <input
+                      class="form-control"
+                      type="password"
+                      name="password"
+                      id="password-confirmation"
+                      placeholder="Password"
+                      onChange={this.handleChange}
+                      value={this.state.password_confirmation}
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="location">location</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      name="location"
+                      id="location"
+                      placeholder="location"
+                      onChange={this.handleChange}
+                      value={this.state.location}
+                    />
+                  </div>
+                  <button type="submit" id="submit-btn" class="btn btn-primary">Submit</button>
+                </form>
+                <div>
+                  {this.state.errors ? this.handleErrors() : null}
                 </div>
+              </div>
             </div>
-        )
-    }
+        </div>
+      </div>
+    )
+  }
 }
 
 export default MyProfile;
