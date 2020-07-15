@@ -11,7 +11,7 @@ export class Products extends Component {
 
     this.state = {
       value: '',
-      products: [],
+      products: this.props.products,
       sendToCart: ''
     }
 
@@ -20,6 +20,9 @@ export class Products extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.getCategories = this.getCategories.bind(this);
     this.handleSort = this.handleSort.bind(this);
+    this.resetSorts = this.resetSorts.bind(this);
+    this.filterBy = this.filterBy.bind(this);
+    this.handleFilter = this.handleFilter.bind(this);
   }
 
 
@@ -86,12 +89,40 @@ export class Products extends Component {
     this.setState({products: sorted});
   }
 
+  sortByRecent() {
+    let sorted = _.orderBy(this.props.products, 'created_at', 'desc');
+    this.setState({ products: sorted });
+  }
+
   handleSort(event) {
     let key = event.target.value;
     console.log(key);
     if (key === 'quantity') {
       this.sortByQuantity()
     }
+    if (key === 'created-at') {
+      this.sortByRecent()
+    }
+  }
+
+  handleFilter(event) {
+    let category = event.target.value;
+    this.filterBy(category);
+  }
+
+  filterBy(category) {
+    if (category == 'all'){
+      this.setState({ products: this.props.products })
+    } else {
+      let filtered = _.filter(this.props.products, function (o) {
+        return o.category == category;
+      });
+      this.setState({products: filtered})
+    }
+  }
+
+  resetSorts() {
+    this.setState({ products: this.props.products });
   }
 
   render() {
@@ -104,9 +135,9 @@ export class Products extends Component {
           <div className="col-4 sort">
             <div className="cat-select">
               <span className="category-heading">{"Category:"}</span>
-              <select id="categories" name="categories">
+              <select id="categories" name="categories" onChange={this.handleFilter}>
                 {this.getCategories()}
-                <option value="all">None</option>
+                <option value="all">All</option>
               </select>
             </div>
             <div className="sort-select">
@@ -116,6 +147,7 @@ export class Products extends Component {
                 <option value="num-orders">Popularity</option>
                 <option value="quantity">Quantity Available</option>
               </select>
+              <button id='resetbtn' className='btn btn-warning' onClick={this.resetSorts}>Reset</button>
             </div>
           </div>
         </div>
@@ -123,7 +155,7 @@ export class Products extends Component {
           {this.showProducts()}
           <SearchResults
             value={this.state.value}
-            data={this.props.products}
+            data={this.state.products}
             renderResults={results => (
               this.showProducts(results)
             )}

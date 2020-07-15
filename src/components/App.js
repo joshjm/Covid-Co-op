@@ -125,7 +125,7 @@ class App extends Component {
                     <Signin {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>)}
                   />{/* keep me at the bottom */}
                   <Route exact path='/order' render={props => (
-                    <Order users={this.state.users} products={this.state.products} />)} />{/* keep me at the bottom */}
+                    <Order users={this.state.users} products={this.state.products} />)} isLoggedIn={this.state.isLoggedIn} />{/* keep me at the bottom */}
                   <Route exact path='/shoppingcart' render={props => (
                     <ShoppingCart {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn}/>)}
                   />

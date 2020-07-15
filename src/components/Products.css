@@ -42,3 +42,9 @@ img {
     margin: 0 auto;
     font-size: 0.8em;
 }
+
+#resetbtn {
+    padding: 0;
+    margin: 0 1em;
+    font-size: 0.8em;
+}
