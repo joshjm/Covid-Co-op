@@ -44,7 +44,7 @@ class App extends Component {
   }
 
   fetchProducts() {
-    console.log(this.state.PRODUCT_URL)
+    console.log(this.state.PRODUCT_URL);
     axios.get(this.state.PRODUCT_URL)
       .then(response => {
         if (response.data) {
