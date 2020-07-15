@@ -59,7 +59,7 @@ export class Products extends Component {
         return (
             <div className='row'>
                 <div className="row">
-                    <input type="text" value={this.state.value} onChange={this.handleChange} />
+                    <span className="search-heading">{"Search:"}</span> <input type="text" value={this.state.value} onChange={this.handleChange} />
                 </div>
                 <div className="row">
                     {this.showProducts()}
