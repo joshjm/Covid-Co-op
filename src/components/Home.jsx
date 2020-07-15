@@ -23,15 +23,9 @@ class Home extends Component{
   render(){
   return(
           <div>
-              <h1>Home page content</h1>
-
-              {
-                this.props.loggedInStatus ?
-                <Link to='/logout' onClick={this.handleClick}>Log Out</Link> :
-                null
-              }
+              <h1>Covid Coop Home</h1>
               <MapContainer  isMarkerShown/>
-                <AddressConverter />
+              <AddressConverter />
           </div>
       )
   }
