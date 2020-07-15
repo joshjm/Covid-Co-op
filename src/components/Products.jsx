@@ -9,14 +9,9 @@ export class Products extends Component {
         super(props);
 
         this.state = {
-<<<<<<< HEAD
-            value: ''
-            shoppingcart
-=======
             value: '',
             products: [],
             sendToCart: ''
->>>>>>> f7fa8565a663ebc1a720bdd0101daecf428f4be6
         }
 
         this.showProducts = this.showProducts.bind(this);
