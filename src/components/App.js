@@ -101,6 +101,12 @@ class App extends Component {
       })
     }
 
+  handleUserEdit = (user) => {
+    this.setState({
+      user: user
+    })
+  }
+
   render() {
     return (
       <div className="App">
@@ -119,7 +125,7 @@ class App extends Component {
                   <Route exact path='/order' render={props => (<Order users={this.state.users} products={this.state.products} />)} />      {/* keep me at the bottom */}
                   <Route exact path='/cart' component={Cart}/>
                   <Route exact path='/profile' render={props => (
-                    <MyProfile {...props} user={this.state.user} loggedInStatus={this.state.isLoggedIn}/>)}
+                    <MyProfile {...props} user={this.state.user} loggedInStatus={this.state.isLoggedIn} handleUserEdit={this.handleUserEdit}/>)}
                   />
                   <Route exact path='/' render={props => (
                     <Home {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn}/>)}
