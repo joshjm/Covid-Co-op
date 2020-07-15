@@ -11,6 +11,7 @@ GH-Pages frontend https://joshjm.github.io/Covid-Co-op/
 https://create-react-app.dev/docs/deployment/#github-pages
 
 Deploy with `npm run deploy`
+Run `npm install` before trying to deploy
 
 If you have issues with 'gh-pages branch already exists', run `node_modules/gh-pages/bin/gh-pages-clean.js` as gh-pages doesnt run acleanup and is a tad buggy. 
 
