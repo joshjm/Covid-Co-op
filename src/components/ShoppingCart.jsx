@@ -8,13 +8,42 @@ class ShoppingCart extends Component {
     this.state = {
       product_id: ''
      }
+    product_id: this.props.location.state
+  }
+
+  showProducts(productsArray) {
+    if(productsArray) {
+      return(
+        productsArray.map((product) => {
+          return(
+          <div key={product.product_id} className='col-3 item'>
+            <img src={product.image_url} alt={product.name}/>
+            <h3>{product.name.slice(0, 25)} ...</h3>
+            <p>Category: {product.category}</p>
+            <p>Quantity available: {product.quantity}</p>
+            <p>{product.description.slice(0, 30)}...</p>
+            <p>Provided by: <a href="">{this.matchUser(product.user_id)}</a></p>
+            <p>Posted: {Math.floor(Math.abs(new Date() - new Date(product.created_at))/1000/60/60/24)} days ago</p>
+          </div>
+          )
+        })
+      )
+    } else {
+      return '';
+    }
   }
 
   render() {
     return(
       <div className="shoppingCart">
-        <h1>Shopping Cart</h1>
-        <p></p>
+        {this.props.loggedInStatus ? (
+          <div className="shoppingCart">
+            <h1>Shopping Cart</h1>
+            <p>{this.showProducts()}</p> // pass through product id to grab product info
+          </div>
+          ) : (
+            <h1>Please Sign in to see your cart</h1>
+        )}
       </div>
     )
   }
@@ -96,20 +125,15 @@ class ShoppingCart extends Component {
 //     }
 // }
 //
-// //component that handles the display of each individual product
+//component that handles the display of each individual product
 // class Display extends React.Component{
 //     //will update size, type and quantity in this component, then send values to parent product display
 //     constructor(props) {
 //         super(props);
 //         this.state = {
-//             size: this.props.item.order.size,
-//             type: this.props.item.order.type,
 //             quantity: this.props.item.order.quantity,
 //         }
-//
-//         this.sizeCallBack = this.sizeCallBack.bind(this);
 //         this.quantityCallBack = this.quantityCallBack.bind(this);
-//         this.typeCallBack = this.typeCallBack.bind(this);
 //     }
 //
 //     //get quantity from child, then send to parent(ProductDisplay)

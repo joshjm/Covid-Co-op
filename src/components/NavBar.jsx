@@ -31,7 +31,7 @@ class NavBar extends Component{
                             </li>
                             {/* TODO conditionally render only if cart.length>1 */}
                             <li className="nav-item">
-                                <Link to='/cart' className="nav-link">View Cart</Link>
+                                <Link to='/shoppingcart' className="nav-link">View Cart</Link>
                             </li>
                             <li className="nav-item">
                                 <Link to='/profile' className="nav-link">My Profile</Link>
