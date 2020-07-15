@@ -12,9 +12,15 @@ class ShoppingCart extends Component {
 
   render() {
     return(
-      <div className="shoppingCart">
-        <h1>Shopping Cart</h1>
-        <p></p>
+      <div>
+        {this.props.loggedInStatus ? (
+          <div className="shoppingCart">
+            <h1>Shopping Cart</h1>
+            <p></p>
+          </div>
+          ) : (
+            <h1>Please Sign in to see your cart</h1>
+        )}
       </div>
     )
   }
