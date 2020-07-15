@@ -44,7 +44,6 @@ class App extends Component {
   }
 
   fetchProducts() {
-    console.log(this.state.PRODUCT_URL);
     axios.get(this.state.PRODUCT_URL)
       .then(response => {
         if (response.data) {
@@ -75,7 +74,7 @@ class App extends Component {
   }
 
     loginStatus = () => {
-      axios.get(`${FRONT_END_URL}/logged_in`,
+      axios.get(`${BACK_END_URL}/logged_in`,
      {withCredentials: true})
       .then(response => {
         if (response.data.logged_in) {
@@ -90,15 +89,17 @@ class App extends Component {
   handleLogin = (data) => {
     this.setState({
       isLoggedIn: true,
-      user: data.user
+      user: data.user //BUG doesnt set right? 
     })
   }
 
   handleLogout = () => {
-      this.setState({
+    axios.delete(`${BACK_END_URL}/logout`).then(
+    this.setState({
       isLoggedIn: false,
       user: {}
-      })
+    })
+    )
     }
 
   handleUserEdit = (user) => {
@@ -111,7 +112,7 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <NavBar/>
+          <NavBar handleLogout={this.handleLogout} userID={this.state.user} loggedInStatus={this.state.isLoggedIn}/>
           <div className='content'>
             <div className='body'>
                 <Switch>
