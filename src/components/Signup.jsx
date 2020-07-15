@@ -11,7 +11,7 @@ class Signup extends Component{
       password_confirmation: 'chicken',
       address: '',
       errors: '',
-      SERVER_URL: 'http://covid-co-op.herokuapp.com/'
+      SERVER_URL: 'https://covid-co-op.herokuapp.com/users'
      };
   }
 
@@ -32,7 +32,7 @@ class Signup extends Component{
     password_confirmation: password_confirmation,
     location: address
   }
-    axios.post('http://localhost:3000/users', user, {withCredentials: true})
+    axios.post(this.state.SERVER_URL, user, {withCredentials: true})
   .then(response => {
     if (response.data.status === 'created') {
       this.props.handleLogin(response.data)
