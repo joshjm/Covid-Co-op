@@ -20,8 +20,9 @@ import {
 
 import axios from 'axios';
 
-let FRONT_END_URL = "http://localhost:3000";
-let BACK_END_URL = "https://covid-co-op.herokuapp.com";
+import { config } from '../Constants' // get prod/dev urls
+let FRONT_END_URL = config.url.FRONT_END_URL;
+let BACK_END_URL = config.url.API_URL;
 
 class App extends Component {
   constructor(props) {
@@ -42,6 +43,7 @@ class App extends Component {
   }
 
   fetchProducts() {
+    console.log(this.state.PRODUCT_URL)
     axios.get(this.state.PRODUCT_URL)
       .then(response => {
         if (response.data) {
