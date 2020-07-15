@@ -7,7 +7,7 @@ import Signup from './Signup';
 import Signin from './Signin';
 import MyProfile from './MyProfile';
 import Order from './Order';
-import Cart from './Cart';
+import ShoppingCart from './ShoppingCart';
 
 
 import './App.css';
@@ -123,7 +123,7 @@ class App extends Component {
                     <Signin {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>)}
                   />{/* keep me at the bottom */}
                   <Route exact path='/order' render={props => (<Order users={this.state.users} products={this.state.products} />)} />      {/* keep me at the bottom */}
-                  <Route exact path='/cart' component={Cart}/>
+                  <Route exact path='/shoppingcart' component={ShoppingCart}/>
                   <Route exact path='/profile' render={props => (
                     <MyProfile {...props} user={this.state.user} loggedInStatus={this.state.isLoggedIn} handleUserEdit={this.handleUserEdit}/>)}
                   />

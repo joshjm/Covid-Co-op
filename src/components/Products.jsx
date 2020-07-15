@@ -10,6 +10,7 @@ export class Products extends Component {
 
         this.state = {
             value: ''
+            shoppingcart
         }
 
         this.showProducts = this.showProducts.bind(this);
@@ -29,8 +30,10 @@ export class Products extends Component {
         }
     }
 
-    handleClick(user_id) {
+    handleClick(product_id) {
       console.log('this is:', this)
+      const { sendToCart } = product_id
+      this.setState({ sendToCart })
 
     }
 
