@@ -141,6 +141,7 @@ export class Products extends Component {
         } else{
             return '';
         }
+      }
   filterBy(category) {
     if (category == 'all'){
       this.setState({ products: this.props.products })
