@@ -7,7 +7,7 @@ class ShoppingCart extends Component {
     super(props);
     this.state = {
       product_id: ''
-     }
+    }
   }
 
   showProducts(productsArray) {
