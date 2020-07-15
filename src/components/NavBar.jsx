@@ -21,7 +21,7 @@ class NavBar extends Component{
                     {this.props.loggedInStatus ? (
                         <ul className="navbar-nav ml-auto ">
                             <li className="nav-item">
-                                <Link to="/" className="nav-link" onClick={this.props.handleLogout}>Click to log out {this.props.userID.name}</Link> 
+                                <Link to="/" className="nav-link" onClick={this.props.handleLogout}>Click to log out {this.props.userID.name}</Link>
                             </li>
                             <li className="nav-item">
                                 <Link to='/' className="nav-link">Home</Link>
@@ -37,7 +37,7 @@ class NavBar extends Component{
                                 <Link to='/profile' className="nav-link">My Profile</Link>
                             </li>
                         </ul>
-                        
+
                     ):(
                         <ul className="navbar-nav ml-auto ">
                             <li className="nav-item">

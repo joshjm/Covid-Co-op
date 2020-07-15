@@ -7,7 +7,7 @@ import Signup from './Signup';
 import Signin from './Signin';
 import MyProfile from './MyProfile';
 import Order from './Order';
-import Cart from './Cart';
+import ShoppingCart from './ShoppingCart';
 
 
 import './App.css';
@@ -34,7 +34,8 @@ class App extends Component {
       isLoggedIn: false,
       user: {},
       users: [],
-      products: []
+      products: [],
+      sendToCart: ''
      };
 
     this.fetchProducts = this.fetchProducts.bind(this);
