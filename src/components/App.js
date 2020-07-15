@@ -7,7 +7,7 @@ import Signup from './Signup';
 import Signin from './Signin';
 import MyProfile from './MyProfile';
 import Order from './Order';
-import Cart from './Cart';
+import ShoppingCart from './ShoppingCart';
 
 
 import './App.css';
@@ -35,7 +35,8 @@ class App extends Component {
       isLoggedIn: false,
       user: {},
       users: [],
-      products: []
+      products: [],
+      sendToCart: ''
      };
 
     this.fetchProducts = this.fetchProducts.bind(this);
@@ -127,7 +128,10 @@ class App extends Component {
                     <Signin handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>)}
                   />
                   <Route exact path='/order' render={props => (<Order user={this.state.user} loggedInStatus={this.state.isLoggedIn} users={this.state.users} products={this.state.products} />)} /> 
-                  <Route exact path='/cart' component={Cart}/>
+                  
+                  <Route exact path='/shoppingcart' render={props => (
+                    <ShoppingCart {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn}/>)}
+                  />
                   <Route exact path='/profile' render={props => (
                     <MyProfile user={this.state.user} loggedInStatus={this.state.isLoggedIn} handleUserEdit={this.handleUserEdit}/>)}
                   />

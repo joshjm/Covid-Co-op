@@ -21,7 +21,7 @@ class NavBar extends Component{
                     {this.props.loggedInStatus ? (
                         <ul className="navbar-nav ml-auto ">
                             <li className="nav-item">
-                                <Link to="/" className="nav-link" onClick={this.props.handleLogout}>Click to log out {this.props.userID.name}</Link> 
+                                <Link to="/" className="nav-link" onClick={this.props.handleLogout}>Click to log out {this.props.userID.name}</Link>
                             </li>
                             <li className="nav-item">
                                 <Link to='/' className="nav-link">Home</Link>
@@ -31,12 +31,13 @@ class NavBar extends Component{
                             </li>
                             {/* TODO conditionally render only if cart.length>1 */}
                             <li className="nav-item">
-                                <Link to='/cart' className="nav-link">View Cart</Link>
+                                <Link to='/shoppingcart' className="nav-link">View Cart</Link>
                             </li>
                             <li className="nav-item">
                                 <Link to='/profile' className="nav-link">My Profile</Link>
                             </li>
                         </ul>
+
                     ):(
                         <ul className="navbar-nav ml-auto ">
                             <li className="nav-item">
@@ -47,6 +48,9 @@ class NavBar extends Component{
                             </li>
                             <li className="nav-item">
                                 <Link to='/sign-in' className="nav-link">Sign in</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to='/order' className="nav-link">Place order</Link>
                             </li>
                         </ul>
                     )}
