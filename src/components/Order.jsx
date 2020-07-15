@@ -3,14 +3,14 @@ import Products from "./Products";
 
 class Order extends Component{
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.propsIn = this.propsIn.bind(this);
     }
 
     propsIn() {
         if(this.props.users.length > 0 && this.props.products.length > 0) {
-            return <Products users={this.props.users} products={this.props.products} />
+            return <Products users={this.props.users} products={this.props.products} isLoggedIn={this.props.isLoggedIn}/>
         } else {
             return '';
         }
