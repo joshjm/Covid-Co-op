@@ -19,6 +19,7 @@ export class Products extends Component {
     this.matchUser = this.matchUser.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.getCategories = this.getCategories.bind(this);
+    this.handleSort = this.handleSort.bind(this);
   }
 
 
@@ -80,6 +81,19 @@ export class Products extends Component {
     }
   }
 
+  sortByQuantity() {
+    let sorted = _.orderBy(this.props.products, 'quantity', 'desc');
+    this.setState({products: sorted});
+  }
+
+  handleSort(event) {
+    let key = event.target.value;
+    console.log(key);
+    if (key === 'quantity') {
+      this.sortByQuantity()
+    }
+  }
+
   render() {
     return (
       <div className='row'>
@@ -97,7 +111,7 @@ export class Products extends Component {
             </div>
             <div className="sort-select">
               <span className="sort-heading">{"Sort by:"}</span>
-              <select id="sort" name="sort">
+              <select id="sort" name="sort" onChange={this.handleSort}>
                 <option value="created-at">Date Added</option>
                 <option value="num-orders">Popularity</option>
                 <option value="quantity">Quantity Available</option>
