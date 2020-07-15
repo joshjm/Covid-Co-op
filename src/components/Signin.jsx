@@ -102,6 +102,9 @@ class Signin extends Component{
                                 </div>
                                 <button type="submit" id="submit-btn" className="btn btn-primary">Sign In</button>
                               </form>
+                              <div>
+                                {this.state.errors ? this.handleErrors() : null}
+                              </div>
                         </div>
                     </div>
                 </div>

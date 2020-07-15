@@ -36,8 +36,14 @@ class ShoppingCart extends Component {
   render() {
     return(
       <div className="shoppingCart">
-        <h1>Shopping Cart</h1>
-        <p>{this.showProducts()}</p> // pass through product id to grab product info
+        {this.props.loggedInStatus ? (
+          <div className="shoppingCart">
+            <h1>Shopping Cart</h1>
+            <p>{this.showProducts()}</p> // pass through product id to grab product info
+          </div>
+          ) : (
+            <h1>Please Sign in to see your cart</h1>
+        )}
       </div>
     )
   }
