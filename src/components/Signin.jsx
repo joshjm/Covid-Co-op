@@ -13,7 +13,8 @@ class Signin extends Component{
     this.state = {
       email: '',
       password: '',
-      errors: ''
+      errors: '',
+      SERVER_URL: 'http://covid-co-op.herokuapp.com/login'
      };
   }
   componentWillMount() {
@@ -35,8 +36,8 @@ class Signin extends Component{
         email: email,
         password: password
       }
-      console.log(`posting to ${BACK_END_URL}/login`)
-      axios.post(`${BACK_END_URL}/login`, {user}, {withCredentials: true})
+
+      axios.post(this.state.SERVER_URL, {user}, {withCredentials: true})
         .then(response => {
           if (response.data.logged_in) {
             this.props.handleLogin(response.data)

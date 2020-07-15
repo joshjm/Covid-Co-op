@@ -21,6 +21,10 @@ class NavBar extends Component{
                         <li className="nav-item">
                           <Link to='/sign-up' className="nav-link">Sign up</Link>
                         </li>
+                      }
+                      {
+                        this.props.loggedInStatus ?
+                        null :
                         <li className="nav-item">
                             <Link to='/sign-in' className="nav-link">Sign in</Link>
                         </li>
