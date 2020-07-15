@@ -27,9 +27,9 @@ export class Products extends Component {
             return(
                 this.props.products.map((product) => {
                     return(
-                    <div key={product.id} className='col-4'>
-                        <img src={product.image_url} alt={product.name} width='200px'/>
-                        <h3>{product.name}</h3>
+                    <div key={product.id} className='col-3 item'>
+                        <img src={product.image_url} alt={product.name}/>
+                        <h3>{product.name.slice(0, 25)} ...</h3>
                         <p>Category: {product.category}</p>
                         <p>Quantity available: {product.quantity}</p>
                         <p>{product.description.slice(0, 30)}...</p>
