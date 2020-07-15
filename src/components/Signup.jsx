@@ -101,7 +101,7 @@ class Signup extends Component{
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label > confirmation">Confirm Password</label>
+                                    <label > Confirm Password</label>
                                     <input
                                       className="form-control"
                                       type="password"
