@@ -74,13 +74,29 @@ class Signin extends Component{
                               <form onSubmit={this.handleSubmit}>
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input class="form-control" type="email" id="email" placeholder="Email" value={email} onChange={this.handleChange} />
+                                    <input
+                                      class="form-control"
+                                      name="email"
+                                      type="email"
+                                      id="email"
+                                      placeholder="Email"
+                                      value={this.state.email}
+                                      onChange={this.handleChange}
+                                    />
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
-                                    <input class="form-control" type="password" id="password" placeholder="Password" value={password} onChange={this.handleChange} />
+                                    <input
+                                      class="form-control"
+                                      name="password"
+                                      type="password"
+                                      id="password"
+                                      placeholder="Password"
+                                      value={this.state.password}
+                                      onChange={this.handleChange}
+                                    />
                                 </div>
-                                <button type="button" id="submit-btn" class="btn btn-primary">Sign In</button>
+                                <button type="submit" id="submit-btn" class="btn btn-primary">Sign In</button>
                               </form>
                         </div>
                     </div>

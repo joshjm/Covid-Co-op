@@ -9,6 +9,7 @@ class Signup extends Component{
       email: 'test@test.com',
       password: 'chicken',
       password_confirmation: 'chicken',
+      address: '',
       errors: '',
       SERVER_URL: 'http://covid-co-op.herokuapp.com/'
      };
@@ -24,13 +25,14 @@ class Signup extends Component{
 
   handleSubmit = (event) => {
       event.preventDefault()
-      const {email, password, password_confirmation} = this.state
+      const {email, password, password_confirmation, address} = this.state
   let user = {
     email: email,
     password: password,
-    password_confirmation: password_confirmation
+    password_confirmation: password_confirmation,
+    location: address
   }
-  axios.post('http://covid-co-op.herokuapp.com/users', user, {withCredentials: true})
+    axios.post('http://localhost:3000/users', user, {withCredentials: true})
   .then(response => {
     if (response.data.status === 'created') {
       this.props.handleLogin(response.data)
@@ -60,7 +62,7 @@ class Signup extends Component{
   }
 
     render(){
-      const {email, password, password_confirmation} = this.state
+      const {email, password, password_confirmation, address} = this.state
 
         return(
             <div class='row justify-content-md-center'>
@@ -107,7 +109,15 @@ class Signup extends Component{
                                 </div>
                                 <div class="form-group">
                                     <label for="address">Address</label>
-                                    <input class="form-control" type="text" id="address" placeholder="address"/>
+                                    <input
+                                      class="form-control"
+                                      type="text"
+                                      name="address"
+                                      id="address"
+                                      placeholder="address"
+                                      onChange={this.handleChange}
+                                      value={this.state.address}
+                                    />
                                 </div>
                                 <button type="submit" id="submit-btn" class="btn btn-primary">Submit</button>
                               </form>
