@@ -4,6 +4,9 @@ Based on the idea of https://www.oma-aus.com/
 
 **[Relational Model](https://docs.google.com/drawings/d/19rR_shnmXq3-8fINedSf1_5HKc0NyXGFbh7hTcxJJ8o/edit)**
 heroku backend http://covid-co-op.herokuapp.com
+
+### Front end deployment guide
+https://create-react-app.dev/docs/deployment/#github-pages
 ## Name ideas
 - covid supply network
 - covid co-op
