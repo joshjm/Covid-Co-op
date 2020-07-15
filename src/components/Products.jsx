@@ -74,7 +74,7 @@ export class Products extends Component {
             });
             let unique = allCategories.filter((item, i, ar) => ar.indexOf(item) === i);
             return unique.map((category) => {
-                return (<option value={category}> {category} </option>)
+                return (<option value={category} key={category}> {category} </option>)
             });
         }
     }
