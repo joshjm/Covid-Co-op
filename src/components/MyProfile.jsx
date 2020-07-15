@@ -51,6 +51,8 @@ class MyProfile extends Component{
       this.setState ({
         isChange: true
       })
+      // update user details
+      this.props.handleUserEdit(response.data);
       this.props.handleLogin(response.data)
     })
 

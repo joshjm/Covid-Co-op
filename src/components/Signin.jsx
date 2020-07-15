@@ -13,7 +13,7 @@ class Signin extends Component{
     this.state = {
       email: '',
       password: '',
-      errors: '',
+      errors: ''
      };
   }
   componentWillMount() {
