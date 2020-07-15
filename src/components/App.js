@@ -5,6 +5,7 @@ import About from './About';
 import Home from './Home';
 import Signup from './Signup';
 import Signin from './Signin';
+import MyProfile from './MyProfile';
 import Order from './Order';
 import Cart from './Cart';
 
@@ -43,7 +44,7 @@ class App extends Component {
   }
 
   fetchProducts() {
-    console.log(this.state.PRODUCT_URL)
+    console.log(this.state.PRODUCT_URL);
     axios.get(this.state.PRODUCT_URL)
       .then(response => {
         if (response.data) {
@@ -100,6 +101,12 @@ class App extends Component {
       })
     }
 
+  handleUserEdit = (user) => {
+    this.setState({
+      user: user
+    })
+  }
+
   render() {
     return (
       <div className="App">
@@ -114,10 +121,12 @@ class App extends Component {
                   />
                   <Route exact path='/sign-in' render={props => (
                     <Signin {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>)}
-                  />
-                  <Route exact path='/order' render={props => (<Order users={this.state.users} products={this.state.products} />)} />      
+                  />{/* keep me at the bottom */}
+                  <Route exact path='/order' render={props => (<Order users={this.state.users} products={this.state.products} />)} />      {/* keep me at the bottom */}
                   <Route exact path='/cart' component={Cart}/>
-
+                  <Route exact path='/profile' render={props => (
+                    <MyProfile {...props} user={this.state.user} loggedInStatus={this.state.isLoggedIn} handleUserEdit={this.handleUserEdit}/>)}
+                  />
                   <Route exact path='/' render={props => (
                     <Home {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn}/>)}
                   />

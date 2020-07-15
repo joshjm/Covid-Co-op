@@ -14,27 +14,30 @@ class NavBar extends Component{
                 </button>
                 <div className="collapse navbar-collapse" id="navbarResponsive">
                     <ul className="navbar-nav ml-auto ">
-                    <li className="nav-item">
-                        <Link to='/' className="nav-link">Home</Link>
-                    </li>
-                    {/* TODO only render if not logged in */}
-                    <li className="nav-item">
-                        <Link to='/sign-up' className="nav-link">Sign up</Link>
-                    </li>  
-                    {/* TODO only render if not logged in */}
-                    <li className="nav-item">
-                        <Link to='/sign-in' className="nav-link">Sign in</Link>
-                    </li>  
-                    {/* TODO only render if logged in */}
-                    <li className="nav-item">
-                        <Link to='/order' className="nav-link">Place order</Link>
-                    </li>
-                    {/* TODO conditionally render only if cart.length>1 */}
-                    <li className="nav-item">
-                        <Link to='/cart' className="nav-link">View Cart</Link>
-                    </li>
+                      <li className="nav-item">
+                          <Link to='/' className="nav-link">Home</Link>
+                      </li>
+                      
+                        <li className="nav-item">
+                          <Link to='/sign-up' className="nav-link">Sign up</Link>
+                        </li>
+                      
+                      
+                        <li className="nav-item">
+                            <Link to='/sign-in' className="nav-link">Sign in</Link>
+                        </li>
+                      <li className="nav-item">
+                          <Link to='/order' className="nav-link">Place order</Link>
+                      </li>
+                      {/* TODO conditionally render only if cart.length>1 */}
+                      <li className="nav-item">
+                          <Link to='/cart' className="nav-link">View Cart</Link>
+                      </li>
+                      <li className="nav-item">
+                          <Link to='/profile' className="nav-link">My Profile</Link>
+                      </li>
                     </ul>
-                </div>  
+                </div>
             </nav>
         )
     }

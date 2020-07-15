@@ -1,8 +1,8 @@
 // Constants.js
 const prod = {
     url: {
-     API_URL: "http://covid-co-op.herokuapp.com",
-     FRONT_END_URL: "https://joshjm.github.io/Covid-Co-op"
+     API_URL: "http://localhost:3000",
+     FRONT_END_URL: "http://localhost:3001"
      }
    };
 const dev = {
