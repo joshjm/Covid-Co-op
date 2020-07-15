@@ -5,21 +5,25 @@ import About from './About';
 import Home from './Home';
 import Signup from './Signup';
 import Signin from './Signin';
+import MyProfile from './MyProfile';
 import Order from './Order';
+import Cart from './Cart';
 
 
 import './App.css';
 
 import {
-  BrowserRouter as Router,
+  // BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
 
 import axios from 'axios';
 
-let FRONT_END_URL = "http://localhost:3000";
-let BACK_END_URL = "http://covid-co-op.herokuapp.com";
+import { config } from '../Constants' // get prod/dev urls
+let FRONT_END_URL = config.url.FRONT_END_URL;
+let BACK_END_URL = config.url.API_URL;
 
 class App extends Component {
   constructor(props) {
@@ -40,6 +44,7 @@ class App extends Component {
   }
 
   fetchProducts() {
+    console.log(this.state.PRODUCT_URL)
     axios.get(this.state.PRODUCT_URL)
       .then(response => {
         if (response.data) {
@@ -107,15 +112,18 @@ class App extends Component {
                   <Route exact path='/about' component={About}/>
                   <Route exact path='/sign-up' render={props => (
                     <Signup {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>)}
-                  />{/* keep me at the bottom */}
+                  />
                   <Route exact path='/sign-in' render={props => (
                     <Signin {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>)}
                   />{/* keep me at the bottom */}
-                <Route exact path='/order' render={props => (<Order users={this.state.users} products={this.state.products} />)} />      {/* keep me at the bottom */}
-
+                  <Route exact path='/order' render={props => (<Order users={this.state.users} products={this.state.products} />)} />      {/* keep me at the bottom */}
+                  <Route exact path='/cart' component={Cart}/>
+                  <Route exact path='/profile' render={props => (
+                    <MyProfile {...props} user={this.state.user} loggedInStatus={this.state.isLoggedIn}/>)}
+                  />
                   <Route exact path='/' render={props => (
                     <Home {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn}/>)}
-                  />{/* keep me at the bottom */}
+                  />
               </Switch>
             </div>
           </div>
