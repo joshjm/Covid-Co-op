@@ -5,12 +5,15 @@ Based on the idea of https://www.oma-aus.com/
 **[Relational Model](https://docs.google.com/drawings/d/19rR_shnmXq3-8fINedSf1_5HKc0NyXGFbh7hTcxJJ8o/edit)**
 heroku backend http://covid-co-op.herokuapp.com
 
+GH-Pages frontend https://joshjm.github.io/Covid-Co-op/
 ### Front end deployment guide
 https://create-react-app.dev/docs/deployment/#github-pages
 
 Deploy with `npm run deploy`
 
 If you have issues with 'gh-pages branch already exists', run `node_modules/gh-pages/bin/gh-pages-clean.js` as gh-pages doesnt run acleanup and is a tad buggy. 
+
+
 ## Name ideas
 - covid supply network
 - covid co-op
