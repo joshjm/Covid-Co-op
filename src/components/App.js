@@ -16,7 +16,8 @@ import {
   // BrowserRouter as Router,
   HashRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect 
 } from "react-router-dom";
 
 import axios from 'axios';
@@ -73,23 +74,23 @@ class App extends Component {
     this.loginStatus()
   }
 
-    loginStatus = () => {
-      axios.get(`${BACK_END_URL}/logged_in`,
-     {withCredentials: true})
-      .then(response => {
-        if (response.data.logged_in) {
-          this.handleLogin(response)
-        } else {
-          this.handleLogout()
-        }
-      })
-      .catch(error => console.log('api errors:', error))
-    }
+  loginStatus = () => {
+    axios.get(`${BACK_END_URL}/logged_in`,
+    {withCredentials: true})
+    .then(response => {
+      if (response.data.logged_in) {
+        this.handleLogin(response)
+      } else {
+        this.handleLogout()
+      }
+    })
+    .catch(error => console.log('api errors:', error))
+  }
 
   handleLogin = (data) => {
     this.setState({
       isLoggedIn: true,
-      user: data.user //BUG doesnt set right? 
+      user: data.user 
     })
   }
 
@@ -100,6 +101,8 @@ class App extends Component {
       user: {}
     })
     )
+    return <Redirect to='/' />
+
     }
 
   handleUserEdit = (user) => {
@@ -118,18 +121,18 @@ class App extends Component {
                 <Switch>
                   <Route exact path='/about' component={About}/>
                   <Route exact path='/sign-up' render={props => (
-                    <Signup {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>)}
+                    <Signup handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>)}
                   />
                   <Route exact path='/sign-in' render={props => (
-                    <Signin {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>)}
-                  />{/* keep me at the bottom */}
+                    <Signin handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>)}
+                  />
                   <Route exact path='/order' render={props => (<Order user={this.state.user} loggedInStatus={this.state.isLoggedIn} users={this.state.users} products={this.state.products} />)} /> 
                   <Route exact path='/cart' component={Cart}/>
                   <Route exact path='/profile' render={props => (
-                    <MyProfile {...props} user={this.state.user} loggedInStatus={this.state.isLoggedIn} handleUserEdit={this.handleUserEdit}/>)}
+                    <MyProfile user={this.state.user} loggedInStatus={this.state.isLoggedIn} handleUserEdit={this.handleUserEdit}/>)}
                   />
                   <Route exact path='/' render={props => (
-                    <Home {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn}/>)}
+                    <Home handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn}/>)}
                   />
               </Switch>
             </div>

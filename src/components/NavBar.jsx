@@ -37,7 +37,6 @@ class NavBar extends Component{
                                 <Link to='/profile' className="nav-link">My Profile</Link>
                             </li>
                         </ul>
-                        
                     ):(
                         <ul className="navbar-nav ml-auto ">
                             <li className="nav-item">
