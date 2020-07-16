@@ -8,6 +8,7 @@ import Signin from './Signin';
 import MyProfile from './MyProfile';
 import Order from './Order';
 import ShoppingCart from './ShoppingCart';
+import ProductView from './ProductView';
 
 
 import './App.css';
@@ -36,6 +37,7 @@ class App extends Component {
       users: [],
       products: [],
       sendToCart: [],
+      productSelect: ''
      };
 
     this.fetchProducts = this.fetchProducts.bind(this);
@@ -139,8 +141,11 @@ class App extends Component {
                   <Route exact path='/profile' render={props => (
                     <MyProfile user={this.state.user} loggedInStatus={this.state.isLoggedIn} handleUserEdit={this.handleUserEdit}/>)}
                   />
+                  <Route exact path='/productview' render={props => (
+                  <ProductView users={this.state.users} products={this.state.products} updateCart={this.updateCart} isLoggedIn={this.state.isLoggedIn} />)}
+                  />
                   <Route exact path='/' render={props => (
-                    <Home handleLogout={this.handleLogout} {...this.state} loggedInStatus={this.state.isLoggedIn}/>)}
+                    <Home handleLogout={this.handleLogout} {...this.state} loggedInStatus={this.state.isLoggedIn} />)}
                   />
               </Switch>
             </div>

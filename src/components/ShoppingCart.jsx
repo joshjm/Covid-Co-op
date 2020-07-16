@@ -39,6 +39,7 @@ class ShoppingCart extends Component {
       this.state.updatedCart.map((p) => {
           return(<div>
             {p.name}
+            <img src={p.image_url}/>
             {/*other properties of each product */}
           </div>)
         }
