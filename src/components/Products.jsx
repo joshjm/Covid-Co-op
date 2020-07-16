@@ -40,6 +40,7 @@ export class Products extends Component {
   handleClick = (product_id) => {
     console.log(product_id);
     this.setState({ sendToCart: product_id })
+    this.props.updateCart(product_id)
   }
 
   handleChange = (event) => {

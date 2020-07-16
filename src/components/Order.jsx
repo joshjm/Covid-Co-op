@@ -10,7 +10,7 @@ class Order extends Component{
 
     propsIn() {
         if(this.props.users.length > 0 && this.props.products.length > 0) {
-            return <Products users={this.props.users} products={this.props.products} isLoggedIn={this.props.isLoggedIn}/>
+            return <Products users={this.props.users} products={this.props.products} updateCart={this.props.updateCart} isLoggedIn={this.props.isLoggedIn}/>
         } else {
             return '';
         }
@@ -22,7 +22,7 @@ class Order extends Component{
                 <h1>Order page</h1>
                 {this.propsIn()}
             </div>
-        )   
+        )
     }
 }
 

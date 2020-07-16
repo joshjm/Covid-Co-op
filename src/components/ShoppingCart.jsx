@@ -1,35 +1,54 @@
 import React, { Component } from 'react'
+import axios from 'axios';
 import _ from "lodash";
+import App from './App'
+import Products from './Products'
 import './ShoppingCart.css'
 
+const SERVER_URL = 'http://localhost:3000/products.json';
+const PRODUCT_URL = 'http://localhost:3000/products/';
+
 class ShoppingCart extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
-      product_id: ''
+      products: [],
+      product_ids: [],
+      quantity: '',
+      updatedCart: [],
+    }
+    this.Product = this.Product.bind(this)
+  }
+
+
+  componentDidMount() {
+    if (!this.props.location.state && !this.props.loggedInStatus) {
+      this.props.history.push('/sign-in')
+    } else if (this.props.location.state) {
+      // axios.get(PRODUCT_URL + this.props.location.state.product_id).then((response) => {
+      //   console.log([this.props.location.state.product_id, ...this.state.product_ids])
+      //   this.setState({
+      //     product_ids: [this.props.location.state.product_id, ...this.state.product_ids],
+      //     products: [response.data, ...this.state.products]
+      let updatedCart = [];
+      this.props.sendToCart.map((productId) => {
+        updatedCart.push(_.filter(this.props.products, {id: productId})[0]);
+      });
+      this.setState({updatedCart: updatedCart})
     }
   }
 
-  showProducts(productsArray) {
-    if(productsArray) {
-      return(
-        productsArray.map((product) => {
-          return(
-          <div key={product.product_id} className='col-3 item'>
-            <img src={product.image_url} alt={product.name}/>
-            <h3>{product.name.slice(0, 25)} ...</h3>
-            <p>Category: {product.category}</p>
-            <p>Quantity available: {product.quantity}</p>
-            <p>{product.description.slice(0, 30)}...</p>
-            <p>Provided by: <a href="">{this.matchUser(product.user_id)}</a></p>
-            <p>Posted: {Math.floor(Math.abs(new Date() - new Date(product.created_at))/1000/60/60/24)} days ago</p>
-          </div>
-          )
-        })
+  Product = () => {
+    return (
+      this.state.updatedCart.map((p) => {
+          return(<div>
+            {p.name}
+            {/*other properties of each product */}
+          </div>)
+        }
       )
-    } else {
-      return '';
-    }
+    )
   }
 
   render() {
@@ -38,7 +57,8 @@ class ShoppingCart extends Component {
         {this.props.loggedInStatus ? (
           <div className="shoppingCart">
             <h1>Shopping Cart</h1>
-            <p>{this.showProducts()}</p> // pass through product id to grab product info
+            {this.Product()}
+              {/* this.state.products.map((p) => <Product product={p} />)} */}
           </div>
           ) : (
             <h1>Please Sign in to see your cart</h1>
@@ -47,6 +67,8 @@ class ShoppingCart extends Component {
     )
   }
 }
+
+
 
 //
 // //create a stateless component to display the shopping cart items
