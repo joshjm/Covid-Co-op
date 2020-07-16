@@ -48,7 +48,7 @@ class ShoppingCart extends Component {
     const DecreaseItem = (i, n) => {
       const products = this.state.updatedCart.slice(0);
       products.forEach((e) => {
-        if (e.id == i) {
+        if (e.id == i && e.orderQuantity > 0) {
           e.orderQuantity = n-1
         }
       })
@@ -62,23 +62,30 @@ class ShoppingCart extends Component {
           });
         }
       const handleChange = (event) => {
-          this.setState({quantity: event.target.value});
-        }
+        this.setState({
+          orderQuantity: event.target.value
+        });
+      }
 
     return (
       this.state.updatedCart.map((p, i) => {
         console.log(p);
           return(
-            <div>
+            <div key={p.id}>
               <img src={p.image_url} alt={p.name}/>
-              <h3>{p.name.slice(0, 25)} ...</h3>
+              <h5>{p.name.slice(0, 25)} ...</h5>
               <p>Category: {p.category}</p>
               <p>Quantity available: {p.quantity}</p>
               <p>{p.description.slice(0, 30)}...</p>
-              <button onClick={() => DecreaseItem(p.id, p.orderQuantity || 0)}>-</button>
-              <input className="input" value={p.orderQuantity} onChange={this.handleChange}/>
-              <button onClick = {() => IncrementItem(p.id, p.orderQuantity || 0)}>+< /button>
-          </div>)
+              {p.quantity > 0 ?
+                <div>
+                  <button onClick={() => DecreaseItem(p.id, p.orderQuantity || 0)}>-</button>
+                  <input className="input" value={p.orderQuantity} onChange={this.handleChange}/>
+                  <button onClick = {() => IncrementItem(p.id, p.orderQuantity || 0)}>+< /button>
+                </div> :
+                <p className="text-danger"> product is out of stock </p>
+              }
+            </div>)
         }
       )
     )
@@ -92,7 +99,6 @@ class ShoppingCart extends Component {
             <h1>Shopping Cart</h1>
             <p>{this.Product()}</p>
             <button type="button" className="btn btn-success btn-sm" onClick={() => {this.handleClick()}}>Check out</button>
-
           </div>
           ) : (
             <h1>Please Sign in to see your cart</h1>
