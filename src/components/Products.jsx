@@ -3,7 +3,8 @@ import _, { uniq } from "lodash";
 import SearchResults from 'react-filter-search'
 import { Redirect } from 'react-router-dom';
 import './Products.css'
-
+import {fetchGPS} from "../helpers";
+var distance = require('gps-distance');
 export class Products extends Component {
 
   constructor(props) {
@@ -12,7 +13,8 @@ export class Products extends Component {
     this.state = {
       value: '',
       products: this.props.products,
-      sendToCart: ''
+      sendToCart: '',
+      userGPS: {},
     }
 
     this.showProducts = this.showProducts.bind(this);
@@ -23,7 +25,23 @@ export class Products extends Component {
     this.resetSorts = this.resetSorts.bind(this);
     this.filterBy = this.filterBy.bind(this);
     this.handleFilter = this.handleFilter.bind(this);
+    // store user's gps
+    console.log(this.props.loggedInStatus);
+    if (this.props.loggedInStatus) {
+      fetchGPS(this.props.user.location).then((results) =>{ // returns promise of results
+        console.log(results.data.results[0].geometry.location);
+        if (results.data.status ==="ZERO_RESULTS"){
+          console.log("user address not found");
+        } else {
+        let gpsCoords = results.data.results[0].geometry.location;
+        this.setState({ userGPS: gpsCoords });
+        console.log(`test: ${this.state.userGPS.lat}`)
+        }
+      })
+    }
+    console.log(distance(45.527517, -122.718766, 45.373373, -121.693604));
   }
+
 
 
   // AXIOS CALL TO GET ALL PRODUCTS FROM THE SERVER
@@ -42,34 +60,7 @@ export class Products extends Component {
     this.setState({ sendToCart: product_id })
   }
 
-  handleChange = (event) => {
-    const { value } = event.target;
-    this.setState({ value });
-  };
-
-  showProducts(productsArray) {
-    if(productsArray) {
-      return(
-        productsArray.map((product) => {
-          return(
-          <div key={product.id} className='col-3 item'>
-            <img src={product.image_url} alt={product.name}/>
-            <h3>{product.name.slice(0, 25)} ...</h3>
-            <p>Category: {product.category}</p>
-            <p>Quantity available: {product.quantity}</p>
-            <p>{product.description.slice(0, 30)}...</p>
-            <p>Provided by: <a href="">{this.matchUser(product.user_id)}</a></p>
-            <p>Posted: {Math.floor(Math.abs(new Date() - new Date(product.created_at))/1000/60/60/24)} days ago</p>
-            {this.props.isLoggedIn ? <button type="button" className="btn btn-success btn-sm" onClick={() => {this.handleClick(product.id)}}>Add to Cart</button> : null}
-            {this.state.sendToCart ? <Redirect to={{pathname: "/shoppingcart", state: {product_id: this.state.sendToCart}}} /> : ''}
-          </div>
-          )
-        })
-      )
-    } else {
-      return '';
-    }
-  }
+ 
 
   getCategories() {
     let allCategories = [];
@@ -119,7 +110,18 @@ export class Products extends Component {
         if(productsArray) {
             return(
                 productsArray.map((product) => {
-                    return(
+                  // get products GPS location
+                  let productGPS = {}
+                  fetchGPS(product.address).then((results) =>{ // returns promise of results
+                    if (results.data.status ==="ZERO_RESULTS"){
+                      console.log("address not found");
+                    } else {
+                    productGPS = results.data.results[0].geometry.location;
+                    }
+                  })
+
+                  // render product card
+                  return(
                     <div key={product.id} className='col-3 item'>
                         <img src={product.image_url} alt={product.name}/>
                         <h3>{product.name.slice(0, 25)} ...</h3>
@@ -129,9 +131,11 @@ export class Products extends Component {
                             <p>Provided by: <a href="">{this.matchUser(product.user_id)}</a></p>
                         <p>Posted: {Math.floor(Math.abs(new Date() - new Date(product.created_at))/1000/60/60/24)} days ago</p>
                         {this.props.loggedInStatus ? (
-                            <p>Your location: {this.props.user.location}</p>
+                            <p>
+                              {Math.round(distance(parseInt(product.lat), parseInt(product.lng), this.state.userGPS.lat, this.state.userGPS.lng))}km away
+                            </p>
                         ) : (
-                            <p>Location: {product.address}</p>
+                            <p>Location: {product.location}</p>
                         )}
                         <button type="button" id="submit-btn" className="btn btn-success btn-sm" onClick={this.handleClick}>Add to Cart</button>
                     </div>
@@ -184,7 +188,6 @@ export class Products extends Component {
           </div>
         </div>
         <div className="row">
-          {this.showProducts()}
           <SearchResults
             value={this.state.value}
             data={this.state.products}
