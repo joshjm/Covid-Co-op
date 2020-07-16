@@ -98,7 +98,6 @@ export class Products extends Component {
 
   productRedirect(event, prod_id) {
     event.preventDefault();
-    console.log(prod_id);
     this.setState({selectedProduct: prod_id})
     this.props.viewProduct(prod_id);
   }
@@ -113,14 +112,14 @@ export class Products extends Component {
                     if (results.data.status ==="ZERO_RESULTS"){
                       console.log("address not found");
                     } else {
-                    productGPS = results.data.results[0].geometry.location;
+                      productGPS = results.data.results[0].geometry.location;
                     }
                   })
 
                   // render product card
                   return(
                     <div key={product.id} className='col-3 item'>
-                        <img src={product.image_url} alt={product.name}/>
+                        <img className='thumbnail' src={product.image_url} alt={product.name}/>
                       <a href="" onClick={(event) => {
                         this.productRedirect(event, product.id);
                       }} ><h3 key={product.id} >{product.name.slice(0, 25)} ...</h3></a>
