@@ -6,7 +6,7 @@ import  AddressConverter  from './AddressConverter';
 import './Home.css';
 import { config } from '../Constants' // get prod/dev urls
 import { Redirect } from 'react-router-dom'
-import {fetchGPS} from "../helpers";
+
 let FRONT_END_URL = config.url.FRONT_END_URL;
 let BACK_END_URL = config.url.API_URL;
 
@@ -15,15 +15,16 @@ class Home extends Component{
   constructor(props) {
     super(props);
     this.state = {
+      isLoggedIn: false,
+      user: {}
      };
-    }
+  }
+
   render(){
   return(
           <div>
               <h1>Covid Coop Home</h1>
-              <MapContainer {...this.props} isMarkerShown/>
-              <div id="map"></div>
-
+              <MapContainer  isMarkerShown/>
               <AddressConverter />
           </div>
       )
