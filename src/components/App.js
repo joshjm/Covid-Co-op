@@ -90,7 +90,7 @@ class App extends Component {
   handleLogin = (data) => {
     this.setState({
       isLoggedIn: true,
-      user: data.user //BUG doesnt set right? 
+      user: data.user //BUG doesnt set right?
     })
   }
 
@@ -124,8 +124,10 @@ class App extends Component {
                   <Route exact path='/sign-in' render={props => (
                     <Signin handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>)}
                   />
-                  <Route exact path='/order' render={props => (<Order user={this.state.user} loggedInStatus={this.state.isLoggedIn} users={this.state.users} products={this.state.products} />)} /> 
-                <Route exact path='/shoppingcart' render={props => (
+                  <Route exact path='/order' render={props => (
+                    <Order user={this.state.user} loggedInStatus={this.state.isLoggedIn} users={this.state.users} products={this.state.products} />)}
+                  /> 
+                  <Route exact path='/shoppingcart' render={props => (
                     <ShoppingCart handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn}/>)}
                   />
                   <Route exact path='/profile' render={props => (
