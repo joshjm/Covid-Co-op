@@ -35,13 +35,18 @@ class App extends Component {
       user: {},
       users: [],
       products: [],
-      sendToCart: ''
+      sendToCart: [],
      };
 
     this.fetchProducts = this.fetchProducts.bind(this);
     this.fetchUsers = this.fetchUsers.bind(this);
+    this.updateCart = this.updateCart.bind(this);
     this.fetchProducts();
     this.fetchUsers();
+  }
+
+  updateCart(product_id) {
+    this.setState({sendToCart: [product_id, ...this.state.sendToCart]})
   }
 
   fetchProducts() {
@@ -91,7 +96,7 @@ class App extends Component {
   handleLogin = (data) => {
     this.setState({
       isLoggedIn: true,
-      user: data.user //BUG doesnt set right? 
+      user: data.user //BUG doesnt set right?
     })
   }
 
@@ -125,9 +130,11 @@ class App extends Component {
                   <Route exact path='/sign-in' render={props => (
                     <Signin handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>)}
                   />
-                  <Route exact path='/order' render={props => (<Order user={this.state.user} loggedInStatus={this.state.isLoggedIn} users={this.state.users} products={this.state.products} />)} /> 
-                <Route exact path='/shoppingcart' render={props => (
-                    <ShoppingCart handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn}/>)}
+                  <Route exact path='/order' render={props => (
+                    <Order users={this.state.users} products={this.state.products} updateCart={this.updateCart} isLoggedIn={this.state.isLoggedIn} />)}
+                  />{/* keep me at the bottom */}
+                  <Route exact path='/shoppingcart' render={props => (
+                    <ShoppingCart {...props} handleLogout={this.handleLogout} sendToCart={this.state.sendToCart} products={this.state.products} loggedInStatus={this.state.isLoggedIn}/>)}
                   />
                   <Route exact path='/profile' render={props => (
                     <MyProfile user={this.state.user} loggedInStatus={this.state.isLoggedIn} handleUserEdit={this.handleUserEdit}/>)}
