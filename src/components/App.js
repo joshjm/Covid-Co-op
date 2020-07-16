@@ -6,6 +6,7 @@ import Home from './Home';
 import Signup from './Signup';
 import Signin from './Signin';
 import MyProfile from './MyProfile';
+import MyProducts from './MyProducts';
 import Order from './Order';
 import ShoppingCart from './ShoppingCart';
 import ProductView from './ProductView';
@@ -145,6 +146,9 @@ class App extends Component {
                   />
                   <Route exact path='/profile' render={props => (
                     <MyProfile user={this.state.user} loggedInStatus={this.state.isLoggedIn} handleUserEdit={this.handleUserEdit}/>)}
+                  />
+                  <Route exact path='/my-products' render={props => (
+                    <MyProducts user={this.state.user} loggedInStatus={this.state.isLoggedIn} />)}
                   />
                   <Route exact path='/productview' render={props => (
                   <ProductView users={this.state.users} products={this.state.products} productSelect={this.state.productSelect} isLoggedIn={this.state.isLoggedIn} />)}
