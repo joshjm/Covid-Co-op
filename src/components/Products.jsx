@@ -15,6 +15,7 @@ export class Products extends Component {
       products: this.props.products,
       sendToCart: '',
       userGPS: {},
+      selectedProduct: ''
     }
 
     this.showProducts = this.showProducts.bind(this);
@@ -25,6 +26,7 @@ export class Products extends Component {
     this.resetSorts = this.resetSorts.bind(this);
     this.filterBy = this.filterBy.bind(this);
     this.handleFilter = this.handleFilter.bind(this);
+    this.productRedirect = this.productRedirect.bind(this);
     // store user's gps
     if (this.props.loggedInStatus) {
       fetchGPS(this.props.user.location).then((results) =>{ // returns promise of results
@@ -89,10 +91,16 @@ export class Products extends Component {
     this.filterBy(category);
   }
 
-    handleChange = (event) => {
-        const { value } = event.target;
-        this.setState({ value });
-    };
+  handleChange = (event) => {
+    const { value } = event.target;
+    this.setState({ value });
+  };
+
+  productRedirect(event, prod_id) {
+    event.preventDefault();
+    this.setState({selectedProduct: prod_id})
+    this.props.viewProduct(prod_id);
+  }
 
     showProducts(productsArray) {
         if(productsArray) {
@@ -111,8 +119,10 @@ export class Products extends Component {
                   // render product card
                   return(
                     <div key={product.id} className='col-3 item'>
-                        <img src={product.image_url} alt={product.name}/>
-                        <h3>{product.name.slice(0, 25)} ...</h3>
+                        <img className='thumbnail' src={product.image_url} alt={product.name}/>
+                      <a href="" onClick={(event) => {
+                        this.productRedirect(event, product.id);
+                      }} ><h3 key={product.id} >{product.name.slice(0, 25)} ...</h3></a>
                         <p>Category: {product.category}</p>
                         <p>Quantity available: {product.quantity}</p>
                         <p>{product.description.slice(0, 30)}...</p>
@@ -130,6 +140,9 @@ export class Products extends Component {
                         }
                         {this.state.sendToCart ?
                           <Redirect to={{pathname: "/shoppingcart", state: {product_id: this.state.sendToCart}}} /> : ''
+                        }
+                        {this.state.selectedProduct ? 
+                          <Redirect to={{pathname: "/productview", state: {product_id: this.state.selectedProduct}}} /> : ''
                         }
                     </div>
                     )
