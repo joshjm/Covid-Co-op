@@ -7,7 +7,7 @@ const prod = {
    };
 const dev = {
     url: {
-        API_URL: "https://covid-co-op.herokuapp.com", // rails - start first
+        API_URL: "http://localhost:3000", // rails - start first
         FRONT_END_URL: "http://localhost:3001" // react
     }
    };

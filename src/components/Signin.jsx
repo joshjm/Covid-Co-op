@@ -1,7 +1,7 @@
 import React, {Component}  from 'react';
 import './Signin.css';
 import axios from 'axios'
-
+import {Redirect, withRouter } from 'react-router-dom';
 import { config } from '../Constants' // get prod/dev urls
 let FRONT_END_URL = config.url.FRONT_END_URL;
 let BACK_END_URL = config.url.API_URL;
@@ -11,13 +11,10 @@ class Signin extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      email: 'test@test.com',
+      email: 'josh@gmail.com',
       password: 'chicken',
       errors: ''
      };
-  }
-  componentWillMount() {
-    return this.props.loggedInStatus ? this.redirect() : null
   }
 
   handleChange = (event) => {
@@ -39,8 +36,9 @@ class Signin extends Component{
       axios.post(BACK_END_URL+'/login', {user}, {withCredentials: true})
         .then(response => {
           if (response.data.logged_in) {
-            this.props.handleLogin(response.data)
-            this.redirect()
+            this.props.handleLogin(response.data);
+            this.props.history.push("/") //doing redirect here.
+
           } else {
             this.setState({
               errors: response.data.errors
@@ -48,11 +46,8 @@ class Signin extends Component{
           }
         })
         .catch(error => console.log('api errors:', error))
-      };
+    };
 
-    redirect = () => {
-      this.props.history.push('/')
-    }
 
     handleErrors = () => {
         return (
@@ -113,4 +108,4 @@ class Signin extends Component{
     }
 }
 
-export default Signin;
+export default withRouter(Signin);
