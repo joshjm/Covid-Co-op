@@ -36,7 +36,7 @@ class AddressConverter extends Component{
                     <button>Submit</button>
                 </form>
                 <div className="output-display">
-                    Output Coordinates: {`Lat: ${this.state.coordinates.lat}, Long: ${this.state.coordinates.lng}` }
+                    {`lat: ${this.state.coordinates.lat}, lng: ${this.state.coordinates.lng},` }
                 </div>
             </div>
         )
