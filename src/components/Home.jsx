@@ -24,7 +24,8 @@ class Home extends Component{
   return(
           <div>
               <h1>Covid Coop Home</h1>
-              <MapContainer  isMarkerShown/>
+              {/* google={window.google} */}
+              <MapContainer {...this.props} />
               <AddressConverter />
           </div>
       )
