@@ -24,7 +24,7 @@ class Home extends Component{
   return(
           <div>
               <h1>Covid Coop Home</h1>
-              <MapContainer  isMarkerShown/>
+              <MapContainer {...this.props} isMarkerShown/>
               <AddressConverter />
           </div>
       )

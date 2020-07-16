@@ -132,7 +132,7 @@ class App extends Component {
                     <MyProfile user={this.state.user} loggedInStatus={this.state.isLoggedIn} handleUserEdit={this.handleUserEdit}/>)}
                   />
                   <Route exact path='/' render={props => (
-                    <Home handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn}/>)}
+                    <Home handleLogout={this.handleLogout} {...this.state} loggedInStatus={this.state.isLoggedIn}/>)}
                   />
               </Switch>
             </div>

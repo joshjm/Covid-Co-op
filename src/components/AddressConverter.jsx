@@ -20,10 +20,10 @@ class AddressConverter extends Component{
 
 
     _handleSubmit(event){
-
         event.preventDefault();
-        fetchGPS(this.state.address).then((results) =>{
-            this.setState({coordinates: results.data.results[0].geometry.location });
+        fetchGPS(this.state.address).then((results) =>{ // returns promise of results
+            let gpsCoords = results.data.results[0].geometry.location;
+            this.setState({ coordinates: gpsCoords });
         });
     }
     render(){
