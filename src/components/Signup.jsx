@@ -18,7 +18,6 @@ class Signup extends Component{
     };
   }
 
-
   handleChange = (event) => {
       const {name, value} = event.target
       this.setState({
@@ -28,6 +27,7 @@ class Signup extends Component{
 
   handleSubmit = (event) => {
       event.preventDefault()
+      // convert address to GPS here
       const {email, password, password_confirmation, address} = this.state
   let user = {
     email: email,

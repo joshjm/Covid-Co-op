@@ -44,12 +44,17 @@ class App extends Component {
     this.fetchProducts = this.fetchProducts.bind(this);
     this.fetchUsers = this.fetchUsers.bind(this);
     this.updateCart = this.updateCart.bind(this);
+    this.viewProduct = this.viewProduct.bind(this);
     this.fetchProducts();
     this.fetchUsers();
   }
 
   updateCart(product_id) {
     this.setState({sendToCart: [product_id, ...this.state.sendToCart]})
+  }
+
+  viewProduct(product_id) {
+    this.setState({ productSelect: product_id })
   }
 
   fetchProducts() {
@@ -134,7 +139,7 @@ class App extends Component {
                     <Signin handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>)}
                   />
                   <Route exact path='/order' render={props => (
-                    <Order users={this.state.users} products={this.state.products} updateCart={this.updateCart} isLoggedIn={this.state.isLoggedIn} />)}
+                    <Order users={this.state.users} products={this.state.products} updateCart={this.updateCart} isLoggedIn={this.state.isLoggedIn} viewProduct={this.viewProduct} />)}
                   />{/* keep me at the bottom */}
                   <Route exact path='/shoppingcart' render={props => (
                     <ShoppingCart {...props} handleLogout={this.handleLogout} sendToCart={this.state.sendToCart} products={this.state.products} loggedInStatus={this.state.isLoggedIn}/>)}
@@ -146,7 +151,7 @@ class App extends Component {
                     <MyProducts user={this.state.user} loggedInStatus={this.state.isLoggedIn} />)}
                   />
                   <Route exact path='/productview' render={props => (
-                  <ProductView users={this.state.users} products={this.state.products} updateCart={this.updateCart} isLoggedIn={this.state.isLoggedIn} />)}
+                  <ProductView users={this.state.users} products={this.state.products} productSelect={this.state.productSelect} isLoggedIn={this.state.isLoggedIn} />)}
                   />
                   <Route exact path='/' render={props => (
                     <Home handleLogout={this.handleLogout} {...this.state} loggedInStatus={this.state.isLoggedIn} />)}
