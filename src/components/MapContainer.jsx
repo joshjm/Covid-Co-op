@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import { compose, withProps } from "recompose";
 import {
   withScriptjs,
@@ -9,6 +9,7 @@ import {
 
 const google_api_key = process.env.REACT_APP_GOOGLE_API_KEY
 const CENTRE_OF_AUSTRALIA = {lat: -25.363, lng: 134.211}
+
 const MapContainer = compose(
   withProps({
     googleMapURL:
@@ -19,6 +20,7 @@ const MapContainer = compose(
   }),
   withScriptjs,
   withGoogleMap
+  // (this.props.user.lat, this.props.user.lng)
 )(() => (
   <GoogleMap defaultZoom={4} defaultCenter={CENTRE_OF_AUSTRALIA}>
     {

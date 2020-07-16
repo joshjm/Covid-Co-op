@@ -15,16 +15,15 @@ class Home extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: false,
-      user: {}
      };
-  }
-
+    }
   render(){
   return(
           <div>
               <h1>Covid Coop Home</h1>
               <MapContainer {...this.props} isMarkerShown/>
+              <div id="map"></div>
+
               <AddressConverter />
           </div>
       )

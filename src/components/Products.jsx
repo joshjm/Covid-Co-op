@@ -26,26 +26,17 @@ export class Products extends Component {
     this.filterBy = this.filterBy.bind(this);
     this.handleFilter = this.handleFilter.bind(this);
     // store user's gps
-    console.log(this.props.loggedInStatus);
     if (this.props.loggedInStatus) {
       fetchGPS(this.props.user.location).then((results) =>{ // returns promise of results
-        console.log(results.data.results[0].geometry.location);
         if (results.data.status ==="ZERO_RESULTS"){
           console.log("user address not found");
         } else {
         let gpsCoords = results.data.results[0].geometry.location;
         this.setState({ userGPS: gpsCoords });
-        console.log(`test: ${this.state.userGPS.lat}`)
         }
       })
     }
-    console.log(distance(45.527517, -122.718766, 45.373373, -121.693604));
   }
-
-
-
-  // AXIOS CALL TO GET ALL PRODUCTS FROM THE SERVER
-
 
   matchUser(user_id) {
     if (this.props.users.length > 0) {
@@ -56,11 +47,8 @@ export class Products extends Component {
   }
 
   handleClick = (product_id) => {
-    console.log(product_id);
     this.setState({ sendToCart: product_id })
   }
-
- 
 
   getCategories() {
     let allCategories = [];
@@ -87,7 +75,6 @@ export class Products extends Component {
 
   handleSort(event) {
     let key = event.target.value;
-    console.log(key);
     if (key === 'quantity') {
       this.sortByQuantity()
     }
