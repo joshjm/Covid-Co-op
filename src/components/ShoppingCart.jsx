@@ -15,12 +15,10 @@ class ShoppingCart extends Component {
     this.state = {
       products: [],
       product_ids: [],
-      quantity: '',
-      updatedCart: [],
+      updatedCart: []
     }
     this.Product = this.Product.bind(this)
   }
-
 
   componentDidMount() {
     if (!this.props.location.state && !this.props.loggedInStatus) {
@@ -35,12 +33,51 @@ class ShoppingCart extends Component {
   }
 
   Product = () => {
+
+    const IncrementItem = (i, n) => {
+      const products = this.state.updatedCart.slice(0);
+      products.forEach((e) => {
+        if (e.id == i) {
+          e.orderQuantity = n+1
+        }
+      })
+      this.setState({
+        updatedCart: products
+      });
+    }
+    const DecreaseItem = (i, n) => {
+      const products = this.state.updatedCart.slice(0);
+      products.forEach((e) => {
+        if (e.id == i) {
+          e.orderQuantity = n-1
+        }
+      })
+      this.setState({
+        updatedCart: products
+      });
+    }
+      const ToggleClick = () => {
+          this.setState({
+            show: !this.state.show
+          });
+        }
+      const handleChange = (event) => {
+          this.setState({quantity: event.target.value});
+        }
+
     return (
-      this.state.updatedCart.map((p) => {
-          return(<div>
-            {p.name}
-            <img src={p.image_url}/>
-            {/*other properties of each product */}
+      this.state.updatedCart.map((p, i) => {
+        console.log(p);
+          return(
+            <div>
+              <img src={p.image_url} alt={p.name}/>
+              <h3>{p.name.slice(0, 25)} ...</h3>
+              <p>Category: {p.category}</p>
+              <p>Quantity available: {p.quantity}</p>
+              <p>{p.description.slice(0, 30)}...</p>
+              <button onClick={() => DecreaseItem(p.id, p.orderQuantity || 0)}>-</button>
+              <input className="input" value={p.orderQuantity} onChange={this.handleChange}/>
+              <button onClick = {() => IncrementItem(p.id, p.orderQuantity || 0)}>+< /button>
           </div>)
         }
       )
@@ -53,8 +90,9 @@ class ShoppingCart extends Component {
         {this.props.loggedInStatus ? (
           <div className="shoppingCart">
             <h1>Shopping Cart</h1>
-            {this.Product()}
-              {/* this.state.products.map((p) => <Product product={p} />)} */}
+            <p>{this.Product()}</p>
+            <button type="button" className="btn btn-success btn-sm" onClick={() => {this.handleClick()}}>Check out</button>
+
           </div>
           ) : (
             <h1>Please Sign in to see your cart</h1>
