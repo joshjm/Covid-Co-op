@@ -61,7 +61,7 @@ export class Products extends Component {
     this.props.updateCart(product_id)
   }
 
- 
+
 
   getCategories() {
     let allCategories = [];
@@ -138,7 +138,12 @@ export class Products extends Component {
                         ) : (
                             <p>Location: {product.location}</p>
                         )}
-                        <button type="button" id="submit-btn" className="btn btn-success btn-sm" onClick={this.handleClick}>Add to Cart</button>
+                        {this.props.isLoggedIn ?
+                          <button type="button" className="btn btn-success btn-sm" onClick={() => {this.handleClick(product.id)}}>Add to Cart</button> : ''
+                        }
+                        {this.state.sendToCart ?
+                          <Redirect to={{pathname: "/shoppingcart", state: {product_id: this.state.sendToCart}}} /> : ''
+                        }
                     </div>
                     )
                 })
