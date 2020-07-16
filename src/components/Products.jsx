@@ -104,7 +104,7 @@ export class Products extends Component {
                     if (results.data.status ==="ZERO_RESULTS"){
                       console.log("address not found");
                     } else {
-                    productGPS = results.data.results[0].geometry.location;
+                      productGPS = results.data.results[0].geometry.location;
                     }
                   })
 
