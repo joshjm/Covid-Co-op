@@ -15,6 +15,7 @@ export class Products extends Component {
       products: this.props.products,
       sendToCart: '',
       userGPS: {},
+      selectedProduct: ''
     }
 
     this.showProducts = this.showProducts.bind(this);
@@ -25,27 +26,19 @@ export class Products extends Component {
     this.resetSorts = this.resetSorts.bind(this);
     this.filterBy = this.filterBy.bind(this);
     this.handleFilter = this.handleFilter.bind(this);
+    this.productRedirect = this.productRedirect.bind(this);
     // store user's gps
-    console.log(this.props.loggedInStatus);
     if (this.props.loggedInStatus) {
       fetchGPS(this.props.user.location).then((results) =>{ // returns promise of results
-        console.log(results.data.results[0].geometry.location);
         if (results.data.status ==="ZERO_RESULTS"){
           console.log("user address not found");
         } else {
         let gpsCoords = results.data.results[0].geometry.location;
         this.setState({ userGPS: gpsCoords });
-        console.log(`test: ${this.state.userGPS.lat}`)
         }
       })
     }
-    console.log(distance(45.527517, -122.718766, 45.373373, -121.693604));
   }
-
-
-
-  // AXIOS CALL TO GET ALL PRODUCTS FROM THE SERVER
-
 
   matchUser(user_id) {
     if (this.props.users.length > 0) {
@@ -56,12 +49,9 @@ export class Products extends Component {
   }
 
   handleClick = (product_id) => {
-    console.log(product_id);
     this.setState({ sendToCart: product_id })
     this.props.updateCart(product_id)
   }
-
-
 
   getCategories() {
     let allCategories = [];
@@ -88,7 +78,6 @@ export class Products extends Component {
 
   handleSort(event) {
     let key = event.target.value;
-    console.log(key);
     if (key === 'quantity') {
       this.sortByQuantity()
     }
@@ -102,10 +91,16 @@ export class Products extends Component {
     this.filterBy(category);
   }
 
-    handleChange = (event) => {
-        const { value } = event.target;
-        this.setState({ value });
-    };
+  handleChange = (event) => {
+    const { value } = event.target;
+    this.setState({ value });
+  };
+
+  productRedirect(event, prod_id) {
+    event.preventDefault();
+    this.setState({selectedProduct: prod_id})
+    this.props.viewProduct(prod_id);
+  }
 
     showProducts(productsArray) {
         if(productsArray) {
@@ -117,15 +112,17 @@ export class Products extends Component {
                     if (results.data.status ==="ZERO_RESULTS"){
                       console.log("address not found");
                     } else {
-                    productGPS = results.data.results[0].geometry.location;
+                      productGPS = results.data.results[0].geometry.location;
                     }
                   })
 
                   // render product card
                   return(
                     <div key={product.id} className='col-3 item'>
-                        <img src={product.image_url} alt={product.name}/>
-                        <h3>{product.name.slice(0, 25)} ...</h3>
+                        <img className='thumbnail' src={product.image_url} alt={product.name}/>
+                      <a href="" onClick={(event) => {
+                        this.productRedirect(event, product.id);
+                      }} ><h3 key={product.id} >{product.name.slice(0, 25)} ...</h3></a>
                         <p>Category: {product.category}</p>
                         <p>Quantity available: {product.quantity}</p>
                         <p>{product.description.slice(0, 30)}...</p>
@@ -143,6 +140,9 @@ export class Products extends Component {
                         }
                         {this.state.sendToCart ?
                           <Redirect to={{pathname: "/shoppingcart", state: {product_id: this.state.sendToCart}}} /> : ''
+                        }
+                        {this.state.selectedProduct ? 
+                          <Redirect to={{pathname: "/productview", state: {product_id: this.state.selectedProduct}}} /> : ''
                         }
                     </div>
                     )

@@ -34,6 +34,9 @@ class NavBar extends Component{
                                 <Link to='/shoppingcart' className="nav-link">View Cart</Link>
                             </li>
                             <li className="nav-item">
+                                <Link to='/my-products' className="nav-link">My Products</Link>
+                            </li>
+                            <li className="nav-item">
                                 <Link to='/profile' className="nav-link">My Profile</Link>
                             </li>
                         </ul>
