@@ -49,6 +49,7 @@ class App extends Component {
       .then(response => {
         if (response.data) {
           this.setState({ products: response.data });
+
         } else {
           this.setState({
             errors: response.data.errors

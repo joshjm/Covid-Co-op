@@ -19,14 +19,14 @@ const MapContainer = compose(
   }),
   withScriptjs,
   withGoogleMap
-)(props => (
+)(() => (
   <GoogleMap defaultZoom={4} defaultCenter={CENTRE_OF_AUSTRALIA}>
-    {props.isMarkerShown && (
+    {
         <div>
             <Marker position={{ lat: -34.397, lng: 150.144 }} />
             <Marker position={{ lat: -34.497, lng: 150.644 }} />
         </div>
-    )}
+    }
   </GoogleMap>
 ));
 
