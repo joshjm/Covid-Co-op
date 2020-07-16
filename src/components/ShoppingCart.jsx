@@ -26,11 +26,6 @@ class ShoppingCart extends Component {
     if (!this.props.location.state && !this.props.loggedInStatus) {
       this.props.history.push('/sign-in')
     } else if (this.props.location.state) {
-      // axios.get(PRODUCT_URL + this.props.location.state.product_id).then((response) => {
-      //   console.log([this.props.location.state.product_id, ...this.state.product_ids])
-      //   this.setState({
-      //     product_ids: [this.props.location.state.product_id, ...this.state.product_ids],
-      //     products: [response.data, ...this.state.products]
       let updatedCart = [];
       this.props.sendToCart.map((productId) => {
         updatedCart.push(_.filter(this.props.products, {id: productId})[0]);
@@ -44,6 +39,7 @@ class ShoppingCart extends Component {
       this.state.updatedCart.map((p) => {
           return(<div>
             {p.name}
+            <img src={p.image_url}/>
             {/*other properties of each product */}
           </div>)
         }
