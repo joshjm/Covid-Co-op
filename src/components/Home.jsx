@@ -29,7 +29,7 @@ class Home extends Component{
               {this.props.loggedInStatus ? '' : (<span> Create an account and make a difference today!</span>)}</p>
               {/* google={window.google} */}
               <MapContainer {...this.props} />
-              <AddressConverter />
+              {/* <AddressConverter /> */}
           </div>
       )
   }

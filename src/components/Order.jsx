@@ -20,8 +20,7 @@ class Order extends Component{
         return(
                 <div>
                     <h1>Order page</h1>
-                    {this.propsIn()}
-                    <Products {...this.props}/>
+                    {this.propsIn()}    
                 </div>
             )
         }

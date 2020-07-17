@@ -3,8 +3,10 @@ import './Signup.css';
 import axios from 'axios';
 import { render } from '@testing-library/react';
 import { config } from '../Constants' // get prod/dev urls
+import {fetchGPS} from "../helpers";
 let FRONT_END_URL = config.url.FRONT_END_URL;
 let BACK_END_URL = config.url.API_URL;
+const CENTRE_OF_AUSTRALIA = {lat: -25.363, lng: 134.211}
 
 class Signup extends Component{
   constructor(props) {
@@ -14,6 +16,8 @@ class Signup extends Component{
       password: '',
       password_confirmation: '',
       address: '',
+      coordinates: {lat: null,  lng: null}, 
+
       errors: '',
     };
   }
@@ -23,30 +27,41 @@ class Signup extends Component{
       this.setState({
         [name]: value
       })
+      fetchGPS(this.state.address).then((results) =>{ // returns promise of results
+        console.log(results);
+        if (results.data.status =="ZERO_RESULTS"){
+          console.log("NO RESULTS");
+          this.setState({coordinates: CENTRE_OF_AUSTRALIA});
+        } else  {
+          let gpsCoords = results.data.results[0].geometry.location;
+          this.setState({ coordinates: gpsCoords });
+        }
+        
+    });
     };
 
   handleSubmit = (event) => {
-    event.preventDefault()
-    // convert address to GPS here
-    const {email, password, password_confirmation, address} = this.state
-    let user = {
-      email: email,
-      password: password,
-      password_confirmation: password_confirmation,
-      location: address
-    }
+      event.preventDefault()
+      // convert address to GPS here
+  let user = {
+    email: this.state.email,
+    password: this.state.password,
+    password_confirmation: this.state.password_confirmation,
+    location: this.state.address,
+    lat: this.state.coordinates.lat,
+    lng: this.state.coordinates.lng
+  }
     axios.post(BACK_END_URL+'/users', user, {withCredentials: true})
     .then(response => {
-      console.log(response);
-      console.log("flag");
-      if (response.data.status === 'created') {
-        this.props.handleLogin(response.data)
-        this.redirect()
-      } else {
-        this.setState({
-          errors: response.data.errors
-        })
-      }
+    if (response.data.status === 'created') {
+      this.props.handleLogin(response.data)
+      this.redirect()
+    } else {
+      this.setState({
+        errors: response.data.errors
+      })
+    }
+    
     })
     .catch(error => console.log('api errors:', error))
   };
@@ -123,6 +138,8 @@ class Signup extends Component{
                                       onChange={this.handleChange}
                                       value={this.state.address}
                                     />
+                                    Latitude: {this.state.coordinates.lat} Longitude: {this.state.coordinates.lng}
+                
                                 </div>
                                 <button type="submit" id="submit-btn" className="btn btn-primary">Submit</button>
                               </form>

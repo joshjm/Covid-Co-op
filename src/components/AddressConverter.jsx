@@ -30,7 +30,7 @@ class AddressConverter extends Component{
 
         return(
             <div className="container">
-                <h2> convert address to gps </h2>
+                <h4> convert address to gps </h4>
                 <form onSubmit={this._handleSubmit}>
                     <input type="text" placeholder="address" onChange={this._handleChange} /> 
                     <button>Submit</button>
