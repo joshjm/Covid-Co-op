@@ -164,7 +164,7 @@ class App extends Component {
                     <MyProfile user={this.state.user} loggedInStatus={this.state.isLoggedIn} handleUserEdit={this.handleUserEdit}/>)}
                   />
                   <Route exact path='/my-products' render={props => (
-                    <MyProducts {...props} user={this.state.user} loggedInStatus={this.state.isLoggedIn} />)}
+                    <MyProducts {...props} user={this.state.user} products={this.state.products} loggedInStatus={this.state.isLoggedIn} />)}
                   />
                   <Route exact path='/productview' render={props => (
                   <ProductView users={this.state.users} products={this.state.products} productSelect={this.state.productSelect} isLoggedIn={this.state.isLoggedIn} />)}
