@@ -7,6 +7,7 @@ import Signup from './Signup';
 import Signin from './Signin';
 import MyProfile from './MyProfile';
 import MyProducts from './MyProducts';
+import AddProduct from './AddProduct';
 import Order from './Order';
 import ShoppingCart from './ShoppingCart';
 import ProductView from './ProductView';
@@ -168,8 +169,11 @@ class App extends Component {
                   <Route exact path='/my-products' render={props => (
                     <MyProducts {...props} user={this.state.user} products={this.state.products} loggedInStatus={this.state.isLoggedIn} />)}
                   />
+                  <Route exact path='/add-product' render={props => (
+                    <AddProduct {...props} user={this.state.user} products={this.state.products} loggedInStatus={this.state.isLoggedIn} />)}
+                  />
                   <Route exact path='/productview' render={props => (
-                  <ProductView users={this.state.users} products={this.state.products} productSelect={this.state.productSelect} isLoggedIn={this.state.isLoggedIn} />)}
+                    <ProductView users={this.state.users} products={this.state.products} productSelect={this.state.productSelect} isLoggedIn={this.state.isLoggedIn} />)}
                   />
                   <Route exact path='/my-purchase' render={props => (
                     <MyPurchase loggedInStatus={this.state.isLoggedIn} />)}
