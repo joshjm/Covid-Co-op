@@ -12,9 +12,9 @@ class Signup extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      email: 'test@test.com',
-      password: 'chicken',
-      password_confirmation: 'chicken',
+      email: '',
+      password: '',
+      password_confirmation: '',
       address: '',
       coordinates: {lat: null,  lng: null}, 
 
@@ -52,9 +52,7 @@ class Signup extends Component{
     lng: this.state.coordinates.lng
   }
     axios.post(BACK_END_URL+'/users', user, {withCredentials: true})
-  .then(response => {
-    console.log(response);
-    console.log("flag");
+    .then(response => {
     if (response.data.status === 'created') {
       this.props.handleLogin(response.data)
       this.redirect()
@@ -63,8 +61,9 @@ class Signup extends Component{
         errors: response.data.errors
       })
     }
-  })
-  .catch(error => console.log('api errors:', error))
+    
+    })
+    .catch(error => console.log('api errors:', error))
   };
 
   redirect = () => {
@@ -109,7 +108,7 @@ class Signup extends Component{
                                     <input
                                       className="form-control"
                                       type="password"
-                                      name="password_confirmation"
+                                      name="password"
                                       id="password"
                                       placeholder="Password"
                                       onChange={this.handleChange}
@@ -121,7 +120,7 @@ class Signup extends Component{
                                     <input
                                       className="form-control"
                                       type="password"
-                                      name="password"
+                                      name="password_confirmation"
                                       id="password-confirmation"
                                       placeholder="Password"
                                       onChange={this.handleChange}
@@ -135,7 +134,7 @@ class Signup extends Component{
                                       type="text"
                                       name="address"
                                       id="address"
-                                      placeholder="address"
+                                      placeholder="Address"
                                       onChange={this.handleChange}
                                       value={this.state.address}
                                     />

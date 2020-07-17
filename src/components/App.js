@@ -152,7 +152,7 @@ class App extends Component {
                 <Switch>
                   <Route exact path='/about' component={About}/>
                   <Route exact path='/sign-up' render={props => (
-                    <Signup handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>)}
+                    <Signup {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>)}
                   />
                   <Route exact path='/sign-in' render={props => (
                     <Signin handleLogin={this.handleLogin} readCookie={this.readCookie} loggedInStatus={this.state.isLoggedIn}/>)}
