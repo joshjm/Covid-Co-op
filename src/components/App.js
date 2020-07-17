@@ -10,6 +10,7 @@ import MyProducts from './MyProducts';
 import Order from './Order';
 import ShoppingCart from './ShoppingCart';
 import ProductView from './ProductView';
+import MyPurchase from './MyPurchase';
 import _ from 'lodash';
 
 
@@ -169,6 +170,9 @@ class App extends Component {
                   />
                   <Route exact path='/productview' render={props => (
                   <ProductView users={this.state.users} products={this.state.products} productSelect={this.state.productSelect} isLoggedIn={this.state.isLoggedIn} />)}
+                  />
+                  <Route exact path='/my-purchase' render={props => (
+                    <MyPurchase loggedInStatus={this.state.isLoggedIn} />)}
                   />
                   <Route exact path='/' render={props => (
                     <Home handleLogout={this.handleLogout} {...this.state} loggedInStatus={this.state.isLoggedIn} />)}

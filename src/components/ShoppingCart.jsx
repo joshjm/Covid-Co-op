@@ -3,6 +3,7 @@ import axios from 'axios';
 import _ from "lodash";
 import App from './App'
 import Products from './Products'
+import { Redirect, Link } from 'react-router-dom';
 import './ShoppingCart.css'
 
 const SERVER_URL = 'http://localhost:3000/products.json';
@@ -110,7 +111,7 @@ class ShoppingCart extends Component {
           <div className="shoppingCart">
             <h1>Shopping Cart</h1>
             <p>{this.Product()}</p>
-            <button type="button" className="btn btn-success btn-sm" onClick={() => {this.handleClick()}}>Check out</button>
+            <Link to="/my-purchase" className="btn btn-success btn-sm" >Check out</Link>
           </div>
           ) : (
             <h1>Please Sign in to see your cart</h1>
