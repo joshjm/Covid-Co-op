@@ -10,6 +10,7 @@ import MyProducts from './MyProducts';
 import Order from './Order';
 import ShoppingCart from './ShoppingCart';
 import ProductView from './ProductView';
+import _ from 'lodash';
 
 
 import './App.css';
@@ -54,7 +55,7 @@ class App extends Component {
   }
 
   updateCart(product_id) {
-    this.setState({sendToCart: [product_id, ...this.state.sendToCart]})
+    this.setState({sendToCart: _([product_id, ...this.state.sendToCart]).uniq().value()})
   }
 
   viewProduct(product_id) {
