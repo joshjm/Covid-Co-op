@@ -24,6 +24,9 @@ class Home extends Component{
   return(
           <div>
               <h1>Covid Coop Home</h1>
+              <h5>Together we are strong.</h5>
+              <p>Covid Coop is a non-profit organisation aiming to link medical product suppliers to organisations in need.
+              Create an account and make a difference today!</p>
               {/* google={window.google} */}
               <MapContainer {...this.props} />
               <AddressConverter />

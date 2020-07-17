@@ -1,5 +1,5 @@
 import React, {useState, Component}  from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import './MyProducts.css';
 import axios from 'axios';
 import _ from "lodash";
@@ -17,7 +17,6 @@ class MyProducts extends Component{
       products: this.props.products,
       user_products: [],
     }
-    this.Product = this.Product.bind(this)
   }
 
   componentDidMount() {
@@ -56,22 +55,8 @@ class MyProducts extends Component{
       } else{
           return (<h2>Add a Product</h2>);
       }
-    }
+  }
 
-  Product = () => {
-        return (
-          this.state.updatedCart.map((p) => {
-              return(
-                <div>
-                  <img src={p.image_url} alt={p.name}/>
-                  <h3>{p.name.slice(0, 25)} ...</h3>
-                  <p>Category: {p.category}</p>
-                  <p>Quantity available: {p.quantity}</p>
-                  <p>{p.description.slice(0, 30)}...</p>
-                </div>
-              )
-            }
-          ))}
 
   render() {
     return(
@@ -79,11 +64,10 @@ class MyProducts extends Component{
         {this.props.loggedInStatus ? (
           <div className="shoppingCart">
             <h1>My Products</h1>
-            {/*}<p>{this.Product()}</p>*/}
             <div className="row">
               {this.showProducts(this.state.user_products)}
             </div>
-            <button type="button" className="btn btn-success btn-sm" onClick={() => {this.handleClick()}}>Add Product</button>
+            <Link to="/add-product" className="btn btn-success btn-sm">Add Product</Link>
 
           </div>
           ) : (
