@@ -7,9 +7,12 @@ import Signup from './Signup';
 import Signin from './Signin';
 import MyProfile from './MyProfile';
 import MyProducts from './MyProducts';
+import AddProduct from './AddProduct';
 import Order from './Order';
 import ShoppingCart from './ShoppingCart';
 import ProductView from './ProductView';
+import MyPurchase from './MyPurchase';
+import _ from 'lodash';
 
 
 import './App.css';
@@ -22,6 +25,7 @@ import {
 } from "react-router-dom";
 
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 import { config } from '../Constants' // get prod/dev urls
 let FRONT_END_URL = config.url.FRONT_END_URL;
@@ -34,6 +38,7 @@ class App extends Component {
       PRODUCT_URL: `${BACK_END_URL}/products`,
       USER_URL: `${BACK_END_URL}/users`,
       isLoggedIn: false,
+      setAuth: false,
       user: {},
       users: [],
       products: [],
@@ -45,12 +50,14 @@ class App extends Component {
     this.fetchUsers = this.fetchUsers.bind(this);
     this.updateCart = this.updateCart.bind(this);
     this.viewProduct = this.viewProduct.bind(this);
+    this.readCookie = this.readCookie.bind(this);
     this.fetchProducts();
     this.fetchUsers();
+    this.readCookie();
   }
 
   updateCart(product_id) {
-    this.setState({sendToCart: [product_id, ...this.state.sendToCart]})
+    this.setState({sendToCart: _([product_id, ...this.state.sendToCart]).uniq().value()})
   }
 
   viewProduct(product_id) {
@@ -86,20 +93,22 @@ class App extends Component {
 
   componentDidMount() {
     this.loginStatus()
+    this.readCookie()
   }
 
-    loginStatus = () => {
-      axios.get(`${BACK_END_URL}/logged_in`,
-     {withCredentials: true})
-      .then(response => {
-        if (response.data.logged_in) {
-          this.handleLogin(response)
-        } else {
-          this.handleLogout()
-        }
-      })
-      .catch(error => console.log('api errors:', error))
-    }
+  loginStatus = () => {
+    axios.get(`${BACK_END_URL}/logged_in`,
+   {withCredentials: true})
+    .then(response => {
+      if (response.data.logged_in) {
+        this.handleLogin(response)
+        this.readCookie()
+      } else {
+        this.handleLogout()
+      }
+    })
+    .catch(error => console.log('api errors:', error))
+  }
 
   handleLogin = (data) => {
     this.setState({
@@ -112,15 +121,25 @@ class App extends Component {
     axios.delete(`${BACK_END_URL}/logout`).then(
     this.setState({
       isLoggedIn: false,
+      setAuth: false,
       user: {}
-    })
-    )
-    }
+    }),
+    Cookies.remove("user")
+  )}
 
   handleUserEdit = (user) => {
     this.setState({
       user: user
     })
+  }
+
+  readCookie = () => {
+    const user = Cookies.get("user");
+    if(user){
+      this.setState({
+        setAuth: true
+      })
+    }
   }
 
   render() {
@@ -133,10 +152,10 @@ class App extends Component {
                 <Switch>
                   <Route exact path='/about' component={About}/>
                   <Route exact path='/sign-up' render={props => (
-                    <Signup handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>)}
+                    <Signup {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>)}
                   />
                   <Route exact path='/sign-in' render={props => (
-                    <Signin handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>)}
+                    <Signin handleLogin={this.handleLogin} readCookie={this.readCookie} loggedInStatus={this.state.isLoggedIn}/>)}
                   />
                   <Route exact path='/order' render={props => (
                     <Order users={this.state.users} products={this.state.products} updateCart={this.updateCart} isLoggedIn={this.state.isLoggedIn} viewProduct={this.viewProduct} />)}
@@ -148,10 +167,16 @@ class App extends Component {
                     <MyProfile user={this.state.user} loggedInStatus={this.state.isLoggedIn} handleUserEdit={this.handleUserEdit}/>)}
                   />
                   <Route exact path='/my-products' render={props => (
-                    <MyProducts user={this.state.user} loggedInStatus={this.state.isLoggedIn} />)}
+                    <MyProducts {...props} user={this.state.user} products={this.state.products} loggedInStatus={this.state.isLoggedIn} />)}
+                  />
+                  <Route exact path='/add-product' render={props => (
+                    <AddProduct {...props} user={this.state.user} products={this.state.products} loggedInStatus={this.state.isLoggedIn} />)}
                   />
                   <Route exact path='/productview' render={props => (
-                  <ProductView users={this.state.users} products={this.state.products} productSelect={this.state.productSelect} isLoggedIn={this.state.isLoggedIn} />)}
+                    <ProductView users={this.state.users} products={this.state.products} productSelect={this.state.productSelect} isLoggedIn={this.state.isLoggedIn} />)}
+                  />
+                  <Route exact path='/my-purchase' render={props => (
+                    <MyPurchase loggedInStatus={this.state.isLoggedIn} />)}
                   />
                   <Route exact path='/' render={props => (
                     <Home handleLogout={this.handleLogout} {...this.state} loggedInStatus={this.state.isLoggedIn} />)}

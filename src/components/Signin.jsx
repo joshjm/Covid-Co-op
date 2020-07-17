@@ -1,6 +1,7 @@
 import React, {Component}  from 'react';
 import './Signin.css';
 import axios from 'axios'
+import Cookies from 'js-cookie';
 import {Redirect, withRouter } from 'react-router-dom';
 import { config } from '../Constants' // get prod/dev urls
 let FRONT_END_URL = config.url.FRONT_END_URL;
@@ -11,8 +12,8 @@ class Signin extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      email: 'josh@gmail.com',
-      password: 'chicken',
+      email: '',
+      password: '',
       errors: ''
      };
   }
@@ -38,7 +39,9 @@ class Signin extends Component{
           if (response.data.logged_in) {
             this.props.handleLogin(response.data);
             this.props.history.push("/") //doing redirect here.
-
+            // set the cookie if login is true
+            Cookies.set("user", "loginTrue", { expires: 1 });
+            this.props.readCookie();
           } else {
             this.setState({
               errors: response.data.errors

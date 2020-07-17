@@ -45,9 +45,7 @@ export class MapContainer extends Component {
 					>
 					</Marker>	
 				)
-
 			})}
-		
 			</Map>
 		);
 	}

@@ -112,7 +112,7 @@ export class Products extends Component {
                     if (results.data.status ==="ZERO_RESULTS"){
                       console.log("address not found");
                     } else {
-                    productGPS = results.data.results[0].geometry.location;
+                      productGPS = results.data.results[0].geometry.location;
                     }
                   })
 
@@ -120,13 +120,13 @@ export class Products extends Component {
                   return(
                     <div key={product.id} className='col-3 item'>
                         <img className='thumbnail' src={product.image_url} alt={product.name}/>
-                      <a href="" onClick={(event) => {
-                        this.productRedirect(event, product.id);
-                      }} ><h3 key={product.id} >{product.name.slice(0, 25)} ...</h3></a>
+                        <a href="" onClick={(event) => {
+                          this.productRedirect(event, product.id);
+                        }} ><h3 key={product.id} >{product.name.slice(0, 25)} ...</h3></a>
                         <p>Category: {product.category}</p>
                         <p>Quantity available: {product.quantity}</p>
                         <p>{product.description.slice(0, 30)}...</p>
-                            <p>Provided by: <a href="">{this.matchUser(product.user_id)}</a></p>
+                        <p>Provided by: <a href="">{this.matchUser(product.user_id)}</a></p>
                         <p>Posted: {Math.floor(Math.abs(new Date() - new Date(product.created_at))/1000/60/60/24)} days ago</p>
                         {this.props.loggedInStatus ? (
                             <p>
@@ -141,7 +141,7 @@ export class Products extends Component {
                         {this.state.sendToCart ?
                           <Redirect to={{pathname: "/shoppingcart", state: {product_id: this.state.sendToCart}}} /> : ''
                         }
-                        {this.state.selectedProduct ? 
+                        {this.state.selectedProduct ?
                           <Redirect to={{pathname: "/productview", state: {product_id: this.state.selectedProduct}}} /> : ''
                         }
                     </div>
