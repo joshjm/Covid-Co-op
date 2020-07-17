@@ -38,9 +38,7 @@ class MyProducts extends Component{
                 return(
                   <div key={product.id} className='col-3 item'>
                       <img className='thumbnail' src={product.image_url} alt={product.name}/>
-                    <a href="" onClick={(event) => {
-                      this.productRedirect(event, product.id);
-                    }} ><h3 key={product.id} >{product.name.slice(0, 25)} ...</h3></a>
+                      <h3 key={product.id} >{product.name.slice(0, 25)} ...</h3>
                       <p>Category: {product.category}</p>
                       <p>Quantity available: {product.quantity}</p>
                       <p>{product.description.slice(0, 30)}...</p>
