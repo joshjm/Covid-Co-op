@@ -10,9 +10,9 @@ class Signup extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      email: 'test@test.com',
-      password: 'chicken',
-      password_confirmation: 'chicken',
+      email: '',
+      password: '',
+      password_confirmation: '',
       address: '',
       errors: '',
     };
@@ -26,29 +26,29 @@ class Signup extends Component{
     };
 
   handleSubmit = (event) => {
-      event.preventDefault()
-      // convert address to GPS here
-      const {email, password, password_confirmation, address} = this.state
-  let user = {
-    email: email,
-    password: password,
-    password_confirmation: password_confirmation,
-    location: address
-  }
-    axios.post(BACK_END_URL+'/users', user, {withCredentials: true})
-  .then(response => {
-    console.log(response);
-    console.log("flag");
-    if (response.data.status === 'created') {
-      this.props.handleLogin(response.data)
-      this.redirect()
-    } else {
-      this.setState({
-        errors: response.data.errors
-      })
+    event.preventDefault()
+    // convert address to GPS here
+    const {email, password, password_confirmation, address} = this.state
+    let user = {
+      email: email,
+      password: password,
+      password_confirmation: password_confirmation,
+      location: address
     }
-  })
-  .catch(error => console.log('api errors:', error))
+    axios.post(BACK_END_URL+'/users', user, {withCredentials: true})
+    .then(response => {
+      console.log(response);
+      console.log("flag");
+      if (response.data.status === 'created') {
+        this.props.handleLogin(response.data)
+        this.redirect()
+      } else {
+        this.setState({
+          errors: response.data.errors
+        })
+      }
+    })
+    .catch(error => console.log('api errors:', error))
   };
 
   redirect = () => {
@@ -93,7 +93,7 @@ class Signup extends Component{
                                     <input
                                       className="form-control"
                                       type="password"
-                                      name="password_confirmation"
+                                      name="password"
                                       id="password"
                                       placeholder="Password"
                                       onChange={this.handleChange}
@@ -105,7 +105,7 @@ class Signup extends Component{
                                     <input
                                       className="form-control"
                                       type="password"
-                                      name="password"
+                                      name="password_confirmation"
                                       id="password-confirmation"
                                       placeholder="Password"
                                       onChange={this.handleChange}
@@ -119,7 +119,7 @@ class Signup extends Component{
                                       type="text"
                                       name="address"
                                       id="address"
-                                      placeholder="address"
+                                      placeholder="Address"
                                       onChange={this.handleChange}
                                       value={this.state.address}
                                     />
