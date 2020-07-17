@@ -28,7 +28,12 @@ class ShoppingCart extends Component {
       this.props.sendToCart.map((productId) => {
         updatedCart.push(_.filter(this.props.products, {id: productId})[0]);
       });
-      this.setState({updatedCart: updatedCart})
+      this.setState({updatedCart: updatedCart},() => {
+        this.setState((prevState) => ({
+          ...prevState,
+          updatedCart: prevState.updatedCart.map(p => ({...p, orderQuantity: 0}))
+        }))
+      })
     }
   }
 
@@ -37,8 +42,8 @@ class ShoppingCart extends Component {
     const IncrementItem = (i, n) => {
       const products = this.state.updatedCart.slice(0);
       products.forEach((e) => {
-        if (e.id == i) {
-          e.orderQuantity = n+1
+        if (e.id == i && e.quantity > e.orderQuantity ) {
+          e.orderQuantity = n+1;
         }
       })
       this.setState({
@@ -61,9 +66,16 @@ class ShoppingCart extends Component {
             show: !this.state.show
           });
         }
-      const handleChange = (event) => {
+      const handleChange = (event, i) => {
+        console.log(event.target.value, i)
+        const products = this.state.updatedCart.slice(0)
+        products.forEach((e) => {
+          if (e.id == i) {
+            e.orderQuantity = event.target.value
+          }
+        })
         this.setState({
-          orderQuantity: event.target.value
+          updatedCart: products
         });
       }
 
@@ -79,9 +91,9 @@ class ShoppingCart extends Component {
               <p>{p.description.slice(0, 30)}...</p>
               {p.quantity > 0 ?
                 <div>
-                  <button onClick={() => DecreaseItem(p.id, p.orderQuantity || 0)}>-</button>
-                  <input className="input" value={p.orderQuantity} onChange={this.handleChange}/>
-                  <button onClick = {() => IncrementItem(p.id, p.orderQuantity || 0)}>+< /button>
+                  <button onClick={() => DecreaseItem(p.id, p.orderQuantity )}>-</button>
+                  <input className="input" value={p.orderQuantity} onChange={(e) => handleChange(e, p.id)}/>
+                  <button onClick = {() => IncrementItem(p.id, p.orderQuantity )}>+< /button>
                 </div> :
                 <p className="text-danger"> product is out of stock </p>
               }
