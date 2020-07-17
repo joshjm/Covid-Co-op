@@ -13,7 +13,7 @@ https://create-react-app.dev/docs/deployment/#github-pages
 Deploy with `npm run deploy`
 Run `npm install` before trying to deploy
 
-If you have issues with 'gh-pages branch already exists', run `node_modules/gh-pages/bin/gh-pages-clean.js` as gh-pages doesnt run acleanup and is a tad buggy. 
+If you have issues with 'gh-pages branch already exists', run `node_modules/gh-pages/bin/gh-pages-clean.js` as gh-pages doesnt run acleanup and is a tad buggy.
 
 
 ## Name ideas
@@ -23,13 +23,13 @@ If you have issues with 'gh-pages branch already exists', run `node_modules/gh-p
 - Supply Dropper
 
 ## Description
-### key features 
-- user login
+### key features
+- user login with error handling
 - inventory management system (CRUD) and orders
 - maps API
 - data visualization
 - hecking cool dev-team
-- jwt for login using react
+- Rails session management with JS-Cookie management in React
 
 ###
 Stack:
@@ -38,18 +38,20 @@ Stack:
 - babel-node
 - React
 - bootstrap
+- JS-Cookie management
 
 #### backend
-- rails as an ORM and API.
+- Rails as an ORM and API.
+- Rails session management for user auth
 
 ### About
-A place to advertise what supplies you have to help fight covid. You can list what quantity of facemasks, gloves, sanitizer etc you have, and whether they are free for anyone to collect, or whether you need to be reimbursed. 
+A place to advertise what supplies you have to help fight covid. You can list what quantity of face-masks, gloves, sanitizer etc you have, and whether they are free for anyone to collect, or whether you need to be reimbursed.
 
-You can see locally what supplies are nearby, to help prevent unecessary travel distance. 
+You can see locally what supplies are nearby, to help prevent unnecessary travel distance.
 
-The app will feature tracking graphs to show supply trends around australia, and will show hospitals current demand. 
+The app will feature tracking graphs to show supply trends around Australia, and will show hospitals current demand.
 
-Hospitals and healthcare providers can make fulfillment requents to page as a whole, that people can fill in part or in total. 
+Hospitals and healthcare providers can make fulfillment requests to page as a whole, that people can fill in part or in total.
 
 Equipment dropoff locations can also be listed.
 
@@ -57,13 +59,13 @@ Equipment dropoff locations can also be listed.
 - [x] Create a backend that can track current supply, locations, hospitals, orders/demand,
 - [ ] create a 'twitter clone' or ebay clone that can display posts people make about their current supply, which displays live from the database
 - [x] create user login,
-- [ ]  and the ability to create new items of supply - not just displaying seed data. 
+- [ ]  and the ability to create new items of supply - not just displaying seed data.
 - [ ] Display locations of supply on a map, either a custom map or using google maps/open maps API (preferred)
 - [ ] allow hospitals to make requests for equipment (new migration/models)
 - [ ] show analytics for total supply/demand across australia, with time based tracking
 - [ ] dummy credit card payment system(?)
 - [x] deploy to heroku
-- [ ] quality filtering of PPE. 
+- [ ] quality filtering of PPE.
 - [ ] database of people who has differnent levels of sterlization
 - [ ] way-stations/relay points for dropoff not directly at hospitals
 
@@ -89,7 +91,7 @@ Equipment dropoff locations can also be listed.
 MAP
 - [ ] Display locations of products on the map
 - [ ] Clickable icons to get more info, and link to description page/link to product
-- [ ] Show location of hospitals/healthcare providers on the map 
+- [ ] Show location of hospitals/healthcare providers on the map
 
 ORDER
 - [ ] Request/Order edit form
@@ -115,6 +117,8 @@ USER
 - [x] User details (personal)
 - [x] User details edit (personal)
 - [ ] All users details (admin)
+- [x] My Products page (displays a users products)
+- [ ] Add new Product page -*in progress*
 - [ ] Optional: Recently viewed page, Saved searches
 
 ### 15/7/2020
@@ -128,4 +132,3 @@ USER
 ### 17/7/2020  Final Day
 - [ ] Testing
 - [ ] Ui improvements
-
