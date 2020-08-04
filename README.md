@@ -7,6 +7,7 @@ Based on the idea of https://www.oma-aus.com/
 heroku backend http://covid-co-op.herokuapp.com
 
 GH-Pages frontend https://joshjm.github.io/Covid-Co-op/
+sample user credentials: username josh@gmail.com password chicken
 ### Front end deployment guide
 https://create-react-app.dev/docs/deployment/#github-pages
 
